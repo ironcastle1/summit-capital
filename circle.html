@@ -15,38 +15,58 @@ color:#e6e6e6;
 }
 
 .container{
-max-width:720px;
-margin:20px auto;
+max-width:1100px;
+margin:30px auto;
 padding:20px;
 }
 
+.back{
+margin-bottom:20px;
+display:inline-block;
+opacity:0.6;
+text-decoration:none;
+color:white;
+}
+
+/* GRID LAYOUT */
+
+.grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:80px;
+align-items:start;
+}
+
+/* LEFT SIDE */
+
 h1{
 font-size:44px;
-margin-bottom:6px;
+margin-bottom:8px;
 }
 
 .tagline{
 font-size:18px;
 opacity:0.9;
-margin-bottom:16px;
+margin-bottom:20px;
 }
 
 .description{
-line-height:1.6;
 opacity:0.85;
-margin-bottom:12px;
-}
-
-.price-box{
-margin-top:12px;
+line-height:1.6;
 margin-bottom:16px;
 }
 
+/* PRICE */
+
+.price-box{
+margin-top:14px;
+margin-bottom:18px;
+}
+
 .old-price{
-font-size:18px;
 text-decoration:line-through;
 opacity:0.5;
-margin-right:8px;
+margin-right:10px;
 }
 
 .discount{
@@ -54,18 +74,15 @@ background:#1f7ae0;
 padding:4px 8px;
 font-size:12px;
 border-radius:3px;
-margin-left:6px;
 }
 
 .new-price{
 font-size:36px;
 font-weight:600;
-margin-top:4px;
+margin-top:6px;
 }
 
-.form-box{
-margin-top:12px;
-}
+/* TELEGRAM INPUT */
 
 input{
 width:100%;
@@ -74,26 +91,43 @@ background:#1a1a1a;
 border:1px solid #333;
 color:white;
 border-radius:4px;
-margin-top:6px;
-margin-bottom:14px;
+margin-top:8px;
+margin-bottom:16px;
 }
 
-.paypal-button{
-margin-top:6px;
+/* SUBSCRIBE BUTTON */
+
+.subscribe-btn{
+display:inline-block;
+background:#229ED9;
+color:white;
+text-decoration:none;
+padding:14px 28px;
+border-radius:4px;
+font-weight:600;
+font-size:15px;
+transition:all 0.15s ease;
 }
 
-.features{
-margin-top:20px;
+.subscribe-btn:hover{
+background:#1b8dc4;
+transform:translateY(-1px);
+}
+
+/* RIGHT COLUMN */
+
+.section-title{
+font-size:20px;
+margin-bottom:18px;
 }
 
 .feature{
 margin-bottom:10px;
-font-size:15px;
 opacity:0.9;
 }
 
 .stats{
-margin-top:20px;
+margin-top:24px;
 padding:20px;
 border:1px solid #1e1e1e;
 background:#121212;
@@ -104,12 +138,15 @@ margin-bottom:8px;
 font-size:15px;
 }
 
-.back{
-margin-bottom:16px;
-display:inline-block;
-opacity:0.6;
-text-decoration:none;
-color:white;
+/* MOBILE */
+
+@media(max-width:900px){
+
+.grid{
+grid-template-columns:1fr;
+gap:40px;
+}
+
 }
 
 </style>
@@ -121,6 +158,12 @@ color:white;
 <div class="container">
 
 <a href="index.html" class="back">← Summit Capital</a>
+
+<div class="grid">
+
+<!-- LEFT COLUMN -->
+
+<div>
 
 <h1>Private Circle</h1>
 
@@ -142,39 +185,29 @@ Inside the Private Circle we focus on the systems that actually move revenue: pa
 
 <span class="discount">38% OFF</span>
 
-<div class="new-price">
-$23 / month
-</div>
+<div class="new-price">$23 / month</div>
 
 </div>
-
-<div class="form-box">
 
 <label>Enter your Telegram username</label>
 
 <input type="text" placeholder="@yourtelegram">
 
-</div>
+<br>
 
-<div class="paypal-button">
-
-<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
-
-<input type="hidden" name="cmd" value="_s-xclick">
-
-<input type="hidden" name="hosted_button_id" value="YOUR_PAYPAL_BUTTON_ID">
-
-<input type="image"
-src="https://www.paypalobjects.com/en_US/i/btn/btn_subscribeCC_LG.gif"
-border="0"
-name="submit"
-title="PayPal - The safer, easier way to pay online">
-
-</form>
+<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=YOUR_PAYPAL_BUTTON_ID" class="subscribe-btn">
+Subscribe via PayPal
+</a>
 
 </div>
 
-<div class="features">
+<!-- RIGHT COLUMN -->
+
+<div>
+
+<div class="section-title">
+What members get
+</div>
 
 <div class="feature">• Advertising frameworks used to scale ecommerce brands</div>
 <div class="feature">• Creative testing systems that increase conversion</div>
@@ -182,13 +215,15 @@ title="PayPal - The safer, easier way to pay online">
 <div class="feature">• Paid acquisition discussions and growth breakdowns</div>
 <div class="feature">• Early visibility on opportunities and partnerships</div>
 
-</div>
-
 <div class="stats">
 
 <div class="stat"><strong>2.4× faster revenue growth</strong> when distribution systems are prioritised</div>
 <div class="stat"><strong>5–10× more creative output</strong> from structured testing frameworks</div>
-<div class="stat"><strong>Lower customer acquisition costs</strong> through stronger offer positioning</div>
+<div class="stat"><strong>Lower acquisition costs</strong> through stronger offer positioning</div>
+
+</div>
+
+</div>
 
 </div>
 
