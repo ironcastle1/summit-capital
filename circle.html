@@ -28,7 +28,7 @@ text-decoration:none;
 color:white;
 }
 
-/* GRID LAYOUT */
+/* GRID */
 
 .grid{
 display:grid;
@@ -37,7 +37,7 @@ gap:80px;
 align-items:start;
 }
 
-/* LEFT SIDE */
+/* LEFT */
 
 h1{
 font-size:44px;
@@ -54,6 +54,27 @@ margin-bottom:20px;
 opacity:0.85;
 line-height:1.6;
 margin-bottom:16px;
+}
+
+/* FOUNDING BLOCK */
+
+.founding{
+margin-top:14px;
+margin-bottom:14px;
+padding:16px;
+border:1px solid #1e1e1e;
+background:#121212;
+}
+
+.founding-title{
+font-size:16px;
+font-weight:600;
+margin-bottom:4px;
+}
+
+.founding-sub{
+font-size:14px;
+opacity:0.7;
 }
 
 /* PRICE */
@@ -82,7 +103,13 @@ font-weight:600;
 margin-top:6px;
 }
 
-/* TELEGRAM INPUT */
+.price-note{
+font-size:13px;
+opacity:0.6;
+margin-top:4px;
+}
+
+/* INPUT */
 
 input{
 width:100%;
@@ -95,7 +122,7 @@ margin-top:8px;
 margin-bottom:16px;
 }
 
-/* SUBSCRIBE BUTTON */
+/* BUTTON */
 
 .subscribe-btn{
 display:inline-block;
@@ -114,7 +141,7 @@ background:#1b8dc4;
 transform:translateY(-1px);
 }
 
-/* RIGHT COLUMN */
+/* RIGHT */
 
 .section-title{
 font-size:20px;
@@ -179,6 +206,18 @@ The companies that control customer acquisition control the market.
 Inside the Private Circle we focus on the systems that actually move revenue: paid media, creative velocity, and distribution strategy.
 </p>
 
+<div class="founding">
+
+<div class="founding-title">
+Founding Cohort
+</div>
+
+<div class="founding-sub">
+Limited to 500 members
+</div>
+
+</div>
+
 <div class="price-box">
 
 <span class="old-price">$36.99</span>
@@ -187,13 +226,15 @@ Inside the Private Circle we focus on the systems that actually move revenue: pa
 
 <div class="new-price">$23 / month</div>
 
+<div class="price-note">
+Founding members lock this price permanently
+</div>
+
 </div>
 
 <label>Enter your Telegram username</label>
 
 <input type="text" placeholder="@yourtelegram">
-
-<br>
 
 <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=YOUR_PAYPAL_BUTTON_ID" class="subscribe-btn">
 Subscribe via PayPal
