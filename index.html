@@ -93,24 +93,43 @@ opacity:0.85;
 }
 
 .buttons{
-margin-top:30px;
+margin-top:35px;
+display:flex;
+align-items:center;
+flex-wrap:wrap;
+gap:14px;
 }
 
-.btn{
+/* PRIMARY BUTTON */
+
+.btn-primary{
 display:inline-block;
-padding:14px 30px;
-background:#ffffff;
-color:#000;
+padding:16px 34px;
+background:#229ED9;
+color:white;
 text-decoration:none;
-margin-right:12px;
-font-size:15px;
-font-weight:500;
+font-size:16px;
+font-weight:600;
+border-radius:4px;
+transition:all 0.2s ease;
 }
+
+.btn-primary:hover{
+background:#1b8dc4;
+transform:translateY(-1px);
+}
+
+/* SECONDARY BUTTONS */
 
 .btn-secondary{
+display:inline-block;
+padding:13px 26px;
 background:#1a1a1a;
 color:#e6e6e6;
 border:1px solid #333;
+text-decoration:none;
+font-size:15px;
+border-radius:4px;
 }
 
 .btn-secondary:hover{
@@ -150,14 +169,17 @@ opacity:0.45;
 }
 
 @media(max-width:900px){
+
 .hero{
 grid-template-columns:1fr;
 }
+
 .side-section{
 border-left:none;
 padding-left:0;
 margin-top:50px;
 }
+
 }
 
 </style>
@@ -212,11 +234,11 @@ The public channel and briefing are where ideas are shared. Behind it sits a pri
 
 <div class="buttons">
 
-<a href="https://t.me/+ye3SREW9w5FlMmNk" class="btn">Join Telegram</a>
+<a href="https://t.me/+ye3SREW9w5FlMmNk" class="btn-primary">Join Telegram</a>
 
-<a href="briefing.html" class="btn btn-secondary">Subscribe to Briefing</a>
+<a href="briefing.html" class="btn-secondary">Subscribe to Briefing</a>
 
-<a href="advisory.html" class="btn btn-secondary">Advisory</a>
+<a href="advisory.html" class="btn-secondary">Advisory</a>
 
 </div>
 
