@@ -95,12 +95,11 @@ opacity:0.85;
 .buttons{
 margin-top:35px;
 display:flex;
-align-items:center;
 flex-wrap:wrap;
 gap:14px;
 }
 
-/* PRIMARY BUTTON */
+/* PRIMARY TELEGRAM BUTTON */
 
 .btn-primary{
 display:inline-block;
@@ -166,6 +165,36 @@ opacity:0.8;
 margin-top:60px;
 font-size:13px;
 opacity:0.45;
+}
+
+/* FLOATING TELEGRAM BAR */
+
+.telegram-bar{
+position:fixed;
+bottom:0;
+left:0;
+width:100%;
+background:#0c0c0c;
+border-top:1px solid #222;
+display:flex;
+justify-content:center;
+align-items:center;
+padding:14px;
+z-index:999;
+}
+
+.telegram-bar a{
+background:#229ED9;
+color:white;
+text-decoration:none;
+padding:12px 28px;
+border-radius:4px;
+font-weight:600;
+font-size:15px;
+}
+
+.telegram-bar a:hover{
+background:#1b8dc4;
 }
 
 @media(max-width:900px){
@@ -264,6 +293,12 @@ Distribution beats product more often than founders realise
 Summit Capital
 </p>
 
+</div>
+
+<!-- FLOATING TELEGRAM BAR -->
+
+<div class="telegram-bar">
+<a href="https://t.me/+ye3SREW9w5FlMmNk">Join the Summit Capital Telegram</a>
 </div>
 
 </body>
