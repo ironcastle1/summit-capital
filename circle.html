@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Private Circle | Summit Capital</title>
+
+<title>Private Circle — Summit Capital</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
@@ -9,169 +10,149 @@
 
 body{
 margin:0;
-font-family:'Inter',sans-serif;
+font-family:'Inter', sans-serif;
 background:#0f0f0f;
 color:#e6e6e6;
 }
 
-.container{
-max-width:1100px;
-margin:30px auto;
-padding:20px;
+/* HEADER */
+
+.header{
+padding:40px 20px;
+border-bottom:1px solid #1b1b1b;
+text-align:center;
 }
 
-.back{
-margin-bottom:20px;
-display:inline-block;
-opacity:0.6;
-text-decoration:none;
-color:white;
+.header h1{
+font-weight:600;
+margin-bottom:10px;
+}
+
+.subtitle{
+opacity:0.7;
+font-size:15px;
+}
+
+/* MAIN */
+
+.container{
+max-width:1000px;
+margin:60px auto;
+padding:20px;
 }
 
 /* GRID */
 
-.grid{
+.pricing-grid{
 display:grid;
 grid-template-columns:1fr 1fr;
-gap:80px;
-align-items:start;
+gap:30px;
 }
 
-/* LEFT */
+/* BOX */
 
-h1{
-font-size:44px;
-margin-bottom:8px;
-}
-
-.tagline{
-font-size:18px;
-opacity:0.9;
-margin-bottom:20px;
-}
-
-.description{
-opacity:0.85;
-line-height:1.6;
-margin-bottom:16px;
-}
-
-/* FOUNDING BLOCK */
-
-.founding{
-margin-top:14px;
-margin-bottom:14px;
-padding:16px;
+.box{
 border:1px solid #1e1e1e;
-background:#121212;
+background:#141414;
+padding:32px;
+border-radius:8px;
+position:relative;
 }
 
-.founding-title{
-font-size:16px;
+/* BEST VALUE TAG */
+
+.best{
+position:absolute;
+top:-12px;
+left:20px;
+background:#229ED9;
+color:white;
+font-size:12px;
+padding:5px 12px;
+border-radius:4px;
 font-weight:600;
-margin-bottom:4px;
 }
 
-.founding-sub{
-font-size:14px;
-opacity:0.7;
+/* TITLE */
+
+.box-title{
+font-size:22px;
+margin-bottom:12px;
 }
 
 /* PRICE */
 
-.price-box{
-margin-top:14px;
-margin-bottom:18px;
-}
-
-.old-price{
-text-decoration:line-through;
-opacity:0.5;
-margin-right:10px;
-}
-
-.discount{
-background:#1f7ae0;
-padding:4px 8px;
-font-size:12px;
-border-radius:3px;
-}
-
-.new-price{
+.price{
 font-size:36px;
 font-weight:600;
-margin-top:6px;
+margin-bottom:8px;
 }
 
-.price-note{
-font-size:13px;
+.price span{
+font-size:14px;
 opacity:0.6;
-margin-top:4px;
+margin-left:5px;
 }
 
-/* INPUT */
+/* DESCRIPTION */
 
-input{
-width:100%;
-padding:12px;
-background:#1a1a1a;
-border:1px solid #333;
-color:white;
-border-radius:4px;
-margin-top:8px;
-margin-bottom:16px;
+.desc{
+opacity:0.7;
+margin-bottom:22px;
+font-size:15px;
+}
+
+/* BENEFITS */
+
+.benefits{
+margin-top:15px;
+}
+
+.benefit{
+margin-bottom:8px;
+opacity:0.85;
+font-size:15px;
 }
 
 /* BUTTON */
 
-.subscribe-btn{
+.button{
+margin-top:26px;
 display:inline-block;
 background:#229ED9;
 color:white;
 text-decoration:none;
-padding:14px 28px;
+padding:15px 26px;
 border-radius:4px;
 font-weight:600;
 font-size:15px;
-transition:all 0.15s ease;
 }
 
-.subscribe-btn:hover{
+.button:hover{
 background:#1b8dc4;
-transform:translateY(-1px);
 }
 
-/* RIGHT */
+/* SMALL NOTE */
 
-.section-title{
-font-size:20px;
-margin-bottom:18px;
+.small-note{
+margin-top:10px;
+font-size:12px;
+opacity:0.5;
 }
 
-.feature{
-margin-bottom:10px;
-opacity:0.9;
-}
+/* FOOTER NOTE */
 
-.stats{
-margin-top:24px;
-padding:20px;
-border:1px solid #1e1e1e;
-background:#121212;
+.note{
+margin-top:50px;
+opacity:0.6;
+font-size:14px;
+text-align:center;
 }
-
-.stat{
-margin-bottom:8px;
-font-size:15px;
-}
-
-/* MOBILE */
 
 @media(max-width:900px){
 
-.grid{
+.pricing-grid{
 grid-template-columns:1fr;
-gap:40px;
 }
 
 }
@@ -182,93 +163,107 @@ gap:40px;
 
 <body>
 
+<div class="header">
+
+<h1>Summit Capital Private Circle</h1>
+
+<div class="subtitle">
+A private discussion group focused on distribution systems, advertising strategy, and brand growth.
+</div>
+
+</div>
+
 <div class="container">
 
-<a href="index.html" class="back">← Summit Capital</a>
+<div class="pricing-grid">
 
-<div class="grid">
+<!-- LIFETIME -->
 
-<!-- LEFT COLUMN -->
+<div class="box">
 
-<div>
+<div class="best">Best Value</div>
 
-<h1>Private Circle</h1>
-
-<p class="tagline">
-Distribution systems, paid media strategy, and growth mechanics.
-</p>
-
-<p class="description">
-The companies that control customer acquisition control the market.
-</p>
-
-<p class="description">
-Inside the Private Circle we focus on the systems that actually move revenue: paid media, creative velocity, and distribution strategy.
-</p>
-
-<div class="founding">
-
-<div class="founding-title">
-Founding Cohort
+<div class="box-title">
+Lifetime Membership
 </div>
 
-<div class="founding-sub">
-Limited to 500 members
+<div class="price">
+$397 <span>one-time</span>
 </div>
 
+<div class="desc">
+Permanent access to the Private Circle and all future discussions.
 </div>
 
-<div class="price-box">
+<div class="benefits">
 
-<span class="old-price">$36.99</span>
+<div class="benefit">• Private Telegram strategy group</div>
 
-<span class="discount">38% OFF</span>
+<div class="benefit">• Advertising & distribution discussions</div>
 
-<div class="new-price">$23 / month</div>
+<div class="benefit">• Brand growth breakdowns</div>
 
-<div class="price-note">
-Founding members lock this price permanently
+<div class="benefit">• Direct access to the community</div>
+
+<div class="benefit">• Future updates included</div>
+
+</div>
+
+<a class="button" href="YOUR_PAYPAL_ONE_TIME_LINK">
+Get Lifetime Access
+</a>
+
+<div class="small-note">
+Founding price. Will increase as membership grows.
 </div>
 
 </div>
 
-<label>Enter your Telegram username</label>
+<!-- MONTHLY -->
 
-<input type="text" placeholder="@yourtelegram">
+<div class="box">
 
-<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=YOUR_PAYPAL_BUTTON_ID" class="subscribe-btn">
-Subscribe via PayPal
+<div class="box-title">
+Monthly Membership
+</div>
+
+<div class="price">
+$23 <span>/ month</span>
+</div>
+
+<div class="desc">
+Access the Private Circle and ongoing discussions.
+</div>
+
+<div class="benefits">
+
+<div class="benefit">• Private Telegram group access</div>
+
+<div class="benefit">• Distribution strategy discussions</div>
+
+<div class="benefit">• Advertising insights</div>
+
+<div class="benefit">• Community collaboration</div>
+
+</div>
+
+<a class="button" href="YOUR_PAYPAL_SUBSCRIPTION_LINK">
+Subscribe Monthly
 </a>
 
 </div>
 
-<!-- RIGHT COLUMN -->
-
-<div>
-
-<div class="section-title">
-What members get
 </div>
 
-<div class="feature">• Advertising frameworks used to scale ecommerce brands</div>
-<div class="feature">• Creative testing systems that increase conversion</div>
-<div class="feature">• Distribution strategies used by fast-growing companies</div>
-<div class="feature">• Paid acquisition discussions and growth breakdowns</div>
-<div class="feature">• Early visibility on opportunities and partnerships</div>
+<div class="note">
 
-<div class="stats">
-
-<div class="stat"><strong>2.4× faster revenue growth</strong> when distribution systems are prioritised</div>
-<div class="stat"><strong>5–10× more creative output</strong> from structured testing frameworks</div>
-<div class="stat"><strong>Lower acquisition costs</strong> through stronger offer positioning</div>
-
-</div>
-
-</div>
+Limited founding cohort.  
+Access may close as the group grows.
 
 </div>
 
 </div>
 
 </body>
+
 </html>
