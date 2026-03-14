@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+
 <title>Summit Capital</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -13,6 +14,8 @@ font-family:'Inter', sans-serif;
 background:#0f0f0f;
 color:#e6e6e6;
 }
+
+/* NAV */
 
 .nav{
 display:flex;
@@ -49,18 +52,21 @@ font-size:14px;
 color:white;
 }
 
+/* MAIN */
+
 .container{
 max-width:1100px;
-margin:30px auto;
+margin:35px auto;
 padding:20px;
 }
 
 .hero{
 display:grid;
 grid-template-columns:1fr 1fr;
-gap:70px;
-align-items:start;
+gap:80px;
 }
+
+/* LEFT COLUMN */
 
 h1{
 font-size:54px;
@@ -70,7 +76,7 @@ font-weight:600;
 
 .tagline{
 font-size:20px;
-margin-bottom:16px;
+margin-bottom:18px;
 opacity:0.9;
 }
 
@@ -82,32 +88,33 @@ margin-bottom:16px;
 }
 
 .capabilities{
-margin:22px 0;
+margin:20px 0;
 display:flex;
 gap:28px;
 }
 
 .capability{
-font-size:17px;
+font-size:16px;
 opacity:0.85;
 }
 
+/* BUTTONS */
+
 .buttons{
-margin-top:16px;
+margin-top:14px;
 display:flex;
-flex-wrap:wrap;
 gap:14px;
+flex-wrap:wrap;
 }
 
 .btn-primary{
-display:inline-block;
 padding:14px 30px;
 background:#229ED9;
 color:white;
 text-decoration:none;
-font-size:15px;
 font-weight:600;
 border-radius:4px;
+font-size:15px;
 }
 
 .btn-primary:hover{
@@ -115,40 +122,37 @@ background:#1b8dc4;
 }
 
 .btn-secondary{
-display:inline-block;
 padding:12px 24px;
 background:#1a1a1a;
-color:#e6e6e6;
 border:1px solid #333;
+color:#e6e6e6;
 text-decoration:none;
-font-size:14px;
 border-radius:4px;
+font-size:14px;
 }
 
 .btn-secondary:hover{
 background:#242424;
 }
 
-/* VALUE LINE */
+/* VALUE STATEMENT */
 
 .email-value{
-margin-top:18px;
+margin-top:20px;
 font-size:15px;
-opacity:0.85;
+opacity:0.9;
 }
 
-/* SOCIAL PROOF */
-
 .email-proof{
-margin-top:4px;
 font-size:13px;
 opacity:0.55;
+margin-top:4px;
 }
 
 /* EMAIL BOX */
 
 .email-box{
-margin-top:12px;
+margin-top:14px;
 padding:18px;
 border:1px solid #1e1e1e;
 background:#161616;
@@ -172,7 +176,7 @@ opacity:0.5;
 margin-top:6px;
 }
 
-/* BEEHIIV EMBED */
+/* EMBED */
 
 .beehiiv-embed{
 width:100%;
@@ -184,27 +188,27 @@ background:transparent;
 
 .section-title{
 font-size:21px;
-margin-bottom:16px;
+margin-bottom:18px;
 }
 
 .block{
-margin-bottom:22px;
+margin-bottom:26px;
 }
 
 .block-title{
 font-size:17px;
-margin-bottom:7px;
+margin-bottom:6px;
 font-weight:500;
 }
 
 .item{
 font-size:15px;
-opacity:0.9;
+opacity:0.85;
 margin-bottom:6px;
 }
 
 .stats{
-margin-top:18px;
+margin-top:20px;
 padding:20px;
 border:1px solid #1e1e1e;
 background:#121212;
@@ -215,13 +219,15 @@ margin-bottom:8px;
 font-size:15px;
 }
 
+/* FOOTER NOTE */
+
 .footer-note{
 margin-top:60px;
 font-size:13px;
-opacity:0.45;
+opacity:0.4;
 }
 
-/* FLOATING BAR */
+/* BOTTOM BAR */
 
 .telegram-bar{
 position:fixed;
@@ -235,21 +241,15 @@ justify-content:center;
 align-items:center;
 gap:30px;
 padding:14px;
-z-index:999;
 }
 
 .telegram-bar a{
 background:#229ED9;
 color:white;
-text-decoration:none;
 padding:11px 24px;
+text-decoration:none;
 border-radius:4px;
 font-weight:600;
-font-size:14px;
-}
-
-.telegram-bar a:hover{
-background:#1b8dc4;
 }
 
 .stats-bottom{
@@ -289,47 +289,51 @@ grid-template-columns:1fr;
 
 <div class="hero">
 
+<!-- LEFT COLUMN -->
+
 <div>
 
 <h1>Summit Capital</h1>
 
 <p class="tagline">
-Advertising systems, distribution strategy, and revenue growth.
+Advertising systems, distribution strategy and revenue growth.
 </p>
 
 <p class="description">
-Most businesses struggle because they build products before building distribution.
+Most companies struggle because they focus on improving the product while neglecting distribution.
 </p>
 
 <p class="description">
-Summit Capital focuses on the practical side of growth: attracting customers, improving advertising results, and building systems that generate consistent revenue.
+Summit Capital focuses on the systems behind modern growth: advertising structures, creative testing and distribution strategies that consistently acquire customers.
 </p>
 
 <div class="capabilities">
+
+<div class="capability">Distribution</div>
+<div class="capability">Advertising</div>
 <div class="capability">Growth</div>
-<div class="capability">Advisory</div>
-<div class="capability">Deal Flow</div>
+
 </div>
 
 <div class="buttons">
 
-<a href="https://t.me/+ye3SREW9w5FlMmNk" class="btn-primary">Join Telegram</a>
+<a href="https://t.me/+ye3SREW9w5FlMmNk" class="btn-primary">
+Join Telegram
+</a>
 
-<a href="circle.html" class="btn-secondary">Private Circle</a>
+<a href="circle.html" class="btn-secondary">
+Private Circle
+</a>
 
 </div>
 
-<!-- VALUE STATEMENT -->
-
 <div class="email-value">
-Short weekly briefings on advertising, distribution and how brands actually scale revenue.
+Short weekly briefings on advertising, distribution and how modern brands actually scale revenue.
 </div>
 
 <div class="email-proof">
-Read by founders, builders and operators studying how modern brands scale.
+Read by founders, builders and operators studying how modern brands grow.
 </div>
-
-<!-- EMAIL CAPTURE -->
 
 <div class="email-box">
 
@@ -338,7 +342,7 @@ Get the Summit Briefing
 </div>
 
 <div class="email-desc">
-Insights on advertising, distribution and brand growth.
+Insights on distribution, advertising and brand growth.
 </div>
 
 <script async src="https://subscribe-forms.beehiiv.com/embed.js"></script>
@@ -358,6 +362,8 @@ Free. No spam. Unsubscribe anytime.
 
 </div>
 
+<!-- RIGHT COLUMN -->
+
 <div>
 
 <div class="section-title">
@@ -367,43 +373,41 @@ What you get
 <div class="block">
 
 <div class="block-title">
-Build influence and visibility
+For builders starting out
 </div>
 
-<div class="item">• Insights on building presence across social media</div>
-<div class="item">• Understanding how successful founders grow audiences</div>
-
-</div>
-
-<div class="block">
-
-<div class="block-title">
-If you're building something
-</div>
-
-<div class="item">• Clear ways to attract your first customers</div>
-<div class="item">• Practical insight into advertising and reaching buyers</div>
-<div class="item">• Breakdowns of successful ecommerce ads</div>
+<div class="item">• Clear strategies to attract early customers</div>
+<div class="item">• Advertising frameworks used by growing brands</div>
 
 </div>
 
 <div class="block">
 
 <div class="block-title">
-If you're scaling a business
+For companies scaling revenue
 </div>
 
-<div class="item">• Ways to improve advertising results</div>
-<div class="item">• Strategies used by fast-growing brands</div>
-<div class="item">• Better customer acquisition systems</div>
+<div class="item">• Creative testing systems for ad performance</div>
+<div class="item">• Distribution structures used by fast growing brands</div>
+
+</div>
+
+<div class="block">
+
+<div class="block-title">
+Inside the ecosystem
+</div>
+
+<div class="item">• Telegram discussions on distribution and growth</div>
+<div class="item">• The Private Circle for deeper strategy conversations</div>
 
 </div>
 
 <div class="stats">
 
-<div class="stat"><strong>2.4× faster revenue growth</strong> when distribution is prioritised</div>
+<div class="stat"><strong>2.4× faster revenue growth</strong> when distribution becomes a priority</div>
 
-<div class="stat"><strong>5–10× more ad ideas tested</strong> by fast-growing brands</div>
+<div class="stat"><strong>5–10× more creative tests</strong> run by high growth brands</div>
 
 <div class="stat"><strong>Lower acquisition costs</strong> through stronger messaging</div>
 
@@ -421,7 +425,9 @@ Summit Capital
 
 <div class="telegram-bar">
 
-<a href="circle.html">Join the Private Circle</a>
+<a href="circle.html">
+Join the Private Circle
+</a>
 
 <div class="stats-bottom">
 Members scale revenue <strong>2.4× faster</strong> using structured distribution systems
@@ -430,5 +436,4 @@ Members scale revenue <strong>2.4× faster</strong> using structured distributio
 </div>
 
 </body>
-
 </html>
