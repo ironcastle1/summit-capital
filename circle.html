@@ -53,7 +53,7 @@ gap:30px;
 align-items:center;
 }
 
-/* BASE BOX */
+/* BOX */
 
 .box{
 border:1px solid #1e1e1e;
@@ -71,7 +71,7 @@ background:#161616;
 transform:scale(1.05);
 }
 
-/* MONTHLY SECONDARY */
+/* MONTHLY */
 
 .box-monthly{
 opacity:0.92;
@@ -91,7 +91,7 @@ border-radius:4px;
 font-weight:600;
 }
 
-/* TITLE */
+/* TITLES */
 
 .box-title{
 font-size:22px;
@@ -165,10 +165,37 @@ font-size:13px;
 opacity:0.8;
 }
 
-/* FOOTER NOTE */
+/* FIT SECTION */
+
+.fit-section{
+margin-top:70px;
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:40px;
+}
+
+.fit-box{
+border:1px solid #1e1e1e;
+background:#141414;
+padding:28px;
+border-radius:8px;
+}
+
+.fit-title{
+font-size:20px;
+margin-bottom:14px;
+}
+
+.fit-item{
+margin-bottom:8px;
+opacity:0.85;
+font-size:15px;
+}
+
+/* FOOTER */
 
 .note{
-margin-top:50px;
+margin-top:60px;
 opacity:0.6;
 font-size:14px;
 text-align:center;
@@ -178,11 +205,13 @@ margin-right:auto;
 line-height:1.6;
 }
 
-/* RESPONSIVE */
-
 @media(max-width:900px){
 
 .pricing-grid{
+grid-template-columns:1fr;
+}
+
+.fit-section{
 grid-template-columns:1fr;
 }
 
@@ -203,7 +232,7 @@ transform:none;
 <h1>Summit Capital Private Circle</h1>
 
 <div class="subtitle">
-A private global network of builders, operators and founders focused on distribution systems, advertising strategy and scalable customer acquisition.
+A private global network focused on distribution systems, advertising strategy, and scalable customer acquisition.
 </div>
 
 </div>
@@ -231,24 +260,18 @@ Pay once. No monthly payments.
 </div>
 
 <div class="desc">
-Permanent access to the Private Circle. Designed for long-term members who want flexibility to participate at their own pace while remaining connected to the network.
+Permanent access to the Private Circle. Designed for members who want long-term access to the network while participating at their own pace.
 </div>
 
 <div class="benefits">
 
-<div class="benefit">• Access to a private global network of founders and builders</div>
-
+<div class="benefit">• Access to a private global network of builders and operators</div>
 <div class="benefit">• Advertising and distribution strategy discussions</div>
-
 <div class="benefit">• Insights from years of real digital marketing campaigns</div>
-
 <div class="benefit">• Brand growth breakdowns and acquisition frameworks</div>
-
 <div class="benefit">• Direct collaboration opportunities with other members</div>
-
-<div class="benefit">• Exposure to emerging opportunities and partnerships</div>
-
-<div class="benefit">• Lifetime members cannot be removed for inactivity for at least 12 months</div>
+<div class="benefit">• Exposure to partnerships and emerging opportunities</div>
+<div class="benefit">• Cannot be removed for inactivity for a minimum of 12 months</div>
 
 </div>
 
@@ -257,7 +280,7 @@ Get Lifetime Access
 </a>
 
 <div class="small-note">
-Founding price — this will increase as the network grows.
+Founding price — this will increase as membership grows.
 </div>
 
 </div>
@@ -280,18 +303,12 @@ Full access to the Private Circle and its discussions while your subscription re
 
 <div class="benefits">
 
-<div class="benefit">• Access to a private global network of founders and builders</div>
-
+<div class="benefit">• Access to a private global network of builders and operators</div>
 <div class="benefit">• Advertising and distribution strategy discussions</div>
-
 <div class="benefit">• Insights from years of real digital marketing campaigns</div>
-
 <div class="benefit">• Brand growth breakdowns and acquisition frameworks</div>
-
 <div class="benefit">• Direct collaboration opportunities with other members</div>
-
-<div class="benefit">• Exposure to emerging opportunities and partnerships</div>
-
+<div class="benefit">• Exposure to partnerships and emerging opportunities</div>
 <div class="benefit">• Access remains active while subscription is maintained</div>
 
 </div>
@@ -304,11 +321,44 @@ Subscribe Monthly
 
 </div>
 
+<!-- WHO THIS IS FOR -->
+
+<div class="fit-section">
+
+<div class="fit-box">
+
+<div class="fit-title">
+Who this is for
+</div>
+
+<div class="fit-item">• Builders growing an ecommerce brand</div>
+<div class="fit-item">• People running or learning paid advertising</div>
+<div class="fit-item">• Operators focused on distribution and customer acquisition</div>
+<div class="fit-item">• People who value serious discussion and collaboration</div>
+<div class="fit-item">• Those building businesses that can benefit from global connections</div>
+
+</div>
+
+<div class="fit-box">
+
+<div class="fit-title">
+Who this is not for
+</div>
+
+<div class="fit-item">• People looking for a basic marketing course</div>
+<div class="fit-item">• Passive spectators who never participate</div>
+<div class="fit-item">• Anyone expecting shortcuts without building real systems</div>
+<div class="fit-item">• Those unwilling to collaborate with other members</div>
+
+</div>
+
+</div>
+
 <div class="note">
 
 Members join the Private Circle to exchange experience, discuss strategy, and connect with other operators building and scaling businesses across different markets.
 
-The focus is practical: distribution, advertising systems, and the mechanics behind real customer acquisition.
+The focus is practical: distribution systems, advertising strategy, and the mechanics behind real customer acquisition.
 
 </div>
 
