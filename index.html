@@ -52,7 +52,7 @@ font-size:14px;
 color:white;
 }
 
-/* MAIN */
+/* MAIN CONTAINER */
 
 .container{
 max-width:1100px;
@@ -60,13 +60,13 @@ margin:35px auto;
 padding:20px;
 }
 
+/* HERO */
+
 .hero{
 display:grid;
 grid-template-columns:1fr 1fr;
 gap:80px;
 }
-
-/* LEFT COLUMN */
 
 h1{
 font-size:54px;
@@ -135,7 +135,7 @@ font-size:14px;
 background:#242424;
 }
 
-/* VALUE STATEMENT */
+/* EMAIL SECTION */
 
 .email-value{
 margin-top:20px;
@@ -148,8 +148,6 @@ font-size:13px;
 opacity:0.55;
 margin-top:4px;
 }
-
-/* EMAIL BOX */
 
 .email-box{
 margin-top:14px;
@@ -175,8 +173,6 @@ font-size:12px;
 opacity:0.5;
 margin-top:6px;
 }
-
-/* EMBED */
 
 .beehiiv-embed{
 width:100%;
@@ -219,15 +215,64 @@ margin-bottom:8px;
 font-size:15px;
 }
 
-/* FOOTER NOTE */
+/* INSIGHTS SECTION */
+
+.insights{
+margin-top:80px;
+}
+
+.insights-title{
+font-size:28px;
+margin-bottom:30px;
+}
+
+.insight-grid{
+display:grid;
+grid-template-columns:1fr 1fr 1fr;
+gap:30px;
+}
+
+.insight{
+border:1px solid #1e1e1e;
+background:#141414;
+padding:20px;
+border-radius:6px;
+transition:0.2s;
+}
+
+.insight:hover{
+border-color:#333;
+}
+
+.insight-title{
+font-size:18px;
+margin-bottom:8px;
+}
+
+.insight-desc{
+font-size:14px;
+opacity:0.7;
+line-height:1.5;
+}
+
+.insight a{
+color:#e6e6e6;
+text-decoration:none;
+}
+
+.insight a:hover{
+text-decoration:underline;
+}
+
+/* FOOTER */
 
 .footer-note{
-margin-top:60px;
+margin-top:80px;
 font-size:13px;
 opacity:0.4;
 }
 
-/* BOTTOM BAR */
+/* FLOATING BAR */
 
 .telegram-bar{
 position:fixed;
@@ -260,6 +305,10 @@ opacity:0.75;
 @media(max-width:900px){
 
 .hero{
+grid-template-columns:1fr;
+}
+
+.insight-grid{
 grid-template-columns:1fr;
 }
 
@@ -308,11 +357,9 @@ Summit Capital focuses on the systems behind modern growth: advertising structur
 </p>
 
 <div class="capabilities">
-
 <div class="capability">Distribution</div>
 <div class="capability">Advertising</div>
 <div class="capability">Growth</div>
-
 </div>
 
 <div class="buttons">
@@ -371,46 +418,68 @@ What you get
 </div>
 
 <div class="block">
-
-<div class="block-title">
-For builders starting out
-</div>
-
+<div class="block-title">For builders starting out</div>
 <div class="item">• Clear strategies to attract early customers</div>
 <div class="item">• Advertising frameworks used by growing brands</div>
-
 </div>
 
 <div class="block">
-
-<div class="block-title">
-For companies scaling revenue
-</div>
-
+<div class="block-title">For companies scaling revenue</div>
 <div class="item">• Creative testing systems for ad performance</div>
 <div class="item">• Distribution structures used by fast growing brands</div>
-
 </div>
 
 <div class="block">
-
-<div class="block-title">
-Inside the ecosystem
-</div>
-
+<div class="block-title">Inside the ecosystem</div>
 <div class="item">• Telegram discussions on distribution and growth</div>
 <div class="item">• The Private Circle for deeper strategy conversations</div>
-
 </div>
 
 <div class="stats">
-
 <div class="stat"><strong>2.4× faster revenue growth</strong> when distribution becomes a priority</div>
-
 <div class="stat"><strong>5–10× more creative tests</strong> run by high growth brands</div>
-
 <div class="stat"><strong>Lower acquisition costs</strong> through stronger messaging</div>
+</div>
 
+</div>
+
+</div>
+
+<!-- DISTRIBUTION INSIGHTS -->
+
+<div class="insights">
+
+<div class="insights-title">
+Distribution Insights
+</div>
+
+<div class="insight-grid">
+
+<div class="insight">
+<a href="notes/distribution-vs-product.html">
+<div class="insight-title">Distribution vs Product</div>
+<div class="insight-desc">
+Why many businesses fail because they perfect the product before building the system that attracts customers.
+</div>
+</a>
+</div>
+
+<div class="insight">
+<a href="notes/ad-creative-systems.html">
+<div class="insight-title">Creative Testing Systems</div>
+<div class="insight-desc">
+How modern ecommerce brands test large volumes of creative to discover winning advertisements.
+</div>
+</a>
+</div>
+
+<div class="insight">
+<a href="notes/customer-acquisition.html">
+<div class="insight-title">Customer Acquisition Structures</div>
+<div class="insight-desc">
+The frameworks used by fast growing online brands to consistently acquire customers.
+</div>
+</a>
 </div>
 
 </div>
