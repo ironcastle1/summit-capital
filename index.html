@@ -21,7 +21,7 @@ color:#e6e6e6;
 display:grid;
 grid-template-columns:1fr auto 1fr;
 align-items:center;
-padding:14px 40px 4px 40px;
+padding:12px 40px 4px 40px;
 }
 
 .cred-left,
@@ -29,8 +29,7 @@ padding:14px 40px 4px 40px;
 font-size:13px;
 opacity:0.75;
 display:flex;
-gap:22px;
-align-items:center;
+gap:20px;
 }
 
 .cred-right{
@@ -64,7 +63,7 @@ animation:shimmer 5s infinite linear;
 
 @keyframes shimmer{
 0%{filter:brightness(1)}
-50%{filter:brightness(1.2)}
+50%{filter:brightness(1.15)}
 100%{filter:brightness(1)}
 }
 
@@ -81,15 +80,15 @@ margin-top:8px;
 .container{
 max-width:1200px;
 margin:auto;
-padding:10px 30px 60px 30px;
+padding:6px 30px 60px 30px;
 }
 
-/* TWO COLUMN */
+/* HERO */
 
 .hero{
 display:grid;
 grid-template-columns:1fr 1fr;
-gap:70px;
+gap:60px;
 align-items:start;
 }
 
@@ -114,23 +113,17 @@ margin-bottom:14px;
 opacity:0.92;
 }
 
-.status-strip{
-margin-top:14px;
-font-size:14px;
-opacity:0.7;
-}
-
 /* BUTTONS */
 
 .buttons{
-margin-top:18px;
+margin-top:16px;
 display:flex;
 gap:12px;
 flex-wrap:wrap;
 }
 
 .btn-primary{
-padding:14px 28px;
+padding:14px 26px;
 background:#229ED9;
 color:white;
 text-decoration:none;
@@ -140,7 +133,7 @@ font-size:15px;
 }
 
 .btn-secondary{
-padding:14px 28px;
+padding:14px 26px;
 background:#171717;
 border:1px solid #2a2a2a;
 color:#e6e6e6;
@@ -150,32 +143,40 @@ font-size:15px;
 font-weight:600;
 }
 
-/* CONSULTING */
+/* GROWTH AUDIT */
 
-.consult-box{
-margin-top:20px;
-padding:20px;
+.audit-box{
+margin-top:18px;
+padding:22px;
 background:#141414;
 border:1px solid #1e1e1e;
 border-radius:8px;
 }
 
-.consult-title{
+.audit-title{
 font-size:18px;
 font-weight:600;
-margin-bottom:8px;
+margin-bottom:10px;
 }
 
-.consult-desc{
+.audit-desc{
 font-size:14px;
 line-height:1.6;
-margin-bottom:10px;
+margin-bottom:12px;
+opacity:0.9;
+}
+
+.audit-list{
+font-size:14px;
+line-height:1.6;
+opacity:0.9;
+margin-bottom:14px;
 }
 
 /* EMAIL */
 
 .email-box{
-margin-bottom:24px;
+margin-bottom:20px;
 padding:20px;
 border:1px solid #1a1a1a;
 background:#121212;
@@ -203,11 +204,11 @@ border:0;
 
 .section-title{
 font-size:22px;
-margin-bottom:16px;
+margin-bottom:14px;
 }
 
 .block{
-margin-bottom:16px;
+margin-bottom:14px;
 }
 
 .block-title{
@@ -220,43 +221,6 @@ margin-bottom:4px;
 font-size:14px;
 line-height:1.6;
 opacity:0.9;
-}
-
-/* RESULTS */
-
-.results{
-margin-top:40px;
-border-top:1px solid #1b1b1b;
-padding-top:36px;
-}
-
-.results-title{
-font-size:24px;
-margin-bottom:22px;
-}
-
-.results-grid{
-display:grid;
-grid-template-columns:1fr 1fr 1fr;
-gap:22px;
-}
-
-.result{
-background:#141414;
-border:1px solid #1e1e1e;
-padding:20px;
-border-radius:8px;
-}
-
-.result-amount{
-font-size:18px;
-font-weight:600;
-margin-bottom:6px;
-}
-
-.result-desc{
-font-size:14px;
-line-height:1.6;
 }
 
 /* TELEGRAM BAR */
@@ -298,10 +262,6 @@ opacity:0.7;
 grid-template-columns:1fr;
 }
 
-.results-grid{
-grid-template-columns:1fr;
-}
-
 .logo{
 width:180px;
 }
@@ -312,12 +272,12 @@ font-size:40px;
 
 .header{
 grid-template-columns:1fr;
-gap:10px;
 text-align:center;
+gap:10px;
 }
 
-.cred-right,
-.cred-left{
+.cred-left,
+.cred-right{
 justify-content:center;
 }
 
@@ -341,7 +301,7 @@ justify-content:center;
 </div>
 
 <div class="cred-right">
-<span>Digital Distribution Strategy</span>
+<span>Digital Distribution</span>
 <span>Digital Growth Strategy</span>
 </div>
 
@@ -358,24 +318,16 @@ justify-content:center;
 <h1>Summit Capital</h1>
 
 <p class="tagline">
-A private circle for people building serious businesses in the digital economy
+Practical strategy for founders building businesses in the digital economy
 </p>
 
 <p class="description">
-Most people never learn the systems that actually create scale. They work hard but remain stuck because they do not understand distribution marketing and leverage.
+Many businesses struggle to grow because they lack clear distribution systems and customer acquisition strategy.
 </p>
 
 <p class="description">
-Inside Summit Capital members learn how companies grow using paid media social platforms and modern acquisition systems.
+Summit Capital focuses on the systems behind modern growth including advertising creative strategy distribution and scalable acquisition channels.
 </p>
-
-<p class="description">
-Members share strategies that help businesses reach millions of customers and scale revenue faster.
-</p>
-
-<div class="status-strip">
-Private circle for founders builders and operators
-</div>
 
 <div class="buttons">
 
@@ -384,23 +336,38 @@ Join Free Telegram
 </a>
 
 <a href="#" class="btn-secondary">
-1 to 1 Consulting
+Book Growth Audit
 </a>
 
 </div>
 
-<div class="consult-box">
 
-<div class="consult-title">
-Private Consulting
+<div class="audit-box">
+
+<div class="audit-title">
+Growth Audit
 </div>
 
-<div class="consult-desc">
-Work directly with Summit Capital through focused one to one strategy sessions designed to help founders scale businesses using marketing distribution and acquisition systems.
+<div class="audit-desc">
+A focused strategy session designed to identify the bottlenecks preventing your business from scaling.
 </div>
 
-<div class="consult-desc">
-Sessions identify growth bottlenecks refine customer acquisition strategy and help build systems capable of producing consistent revenue expansion.
+<div class="audit-list">
+What you receive
+<br><br>
+Full review of your business model
+<br>
+Analysis of your customer acquisition strategy
+<br>
+Clear breakdown of growth bottlenecks
+<br>
+Three to five specific growth experiments you can implement immediately
+<br>
+Thirty minute strategy call to walk through the findings
+</div>
+
+<div class="audit-desc">
+Ideal for founders running online businesses ecommerce brands agencies or digital services who want clear direction on how to grow faster.
 </div>
 
 </div>
@@ -436,22 +403,22 @@ Inside Summit
 
 <div class="block">
 <div class="block-title">Digital Distribution</div>
-<div class="item">Learn how brands reach massive audiences through social platforms and paid media</div>
+<div class="item">How modern brands reach millions through social platforms and paid media</div>
 </div>
 
 <div class="block">
 <div class="block-title">Advertising Systems</div>
-<div class="item">Understand the campaigns and acquisition strategies used to scale companies</div>
+<div class="item">Frameworks behind scalable customer acquisition</div>
 </div>
 
 <div class="block">
 <div class="block-title">Scaling Businesses</div>
-<div class="item">Frameworks used by founders growing companies through marketing and distribution</div>
+<div class="item">Growth systems used by founders building online companies</div>
 </div>
 
 <div class="block">
 <div class="block-title">Market Opportunities</div>
-<div class="item">Insights into crypto digital markets and emerging opportunities</div>
+<div class="item">Insights into emerging opportunities across digital markets</div>
 </div>
 
 </div>
