@@ -16,43 +16,49 @@ background:#0d0d0d;
 color:#e6e6e6;
 }
 
+/* NAV */
+
 .nav{
 display:flex;
-justify-content:space-between;
+justify-content:center;
 align-items:center;
-padding:22px 60px;
+padding:20px;
 border-bottom:1px solid #1a1a1a;
-}
-
-.logo{
 font-size:18px;
 font-weight:600;
-letter-spacing:0.4px;
+letter-spacing:0.5px;
 }
+
+/* MAIN */
 
 .container{
-max-width:1300px;
-margin:40px auto;
-padding:40px;
+max-width:1200px;
+margin:auto;
+padding:60px 30px;
 }
 
+/* HERO */
+
 .hero{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:90px;
-align-items:start;
+text-align:center;
+max-width:750px;
+margin:auto;
+}
+
+.hero-logo{
+width:170px;
+margin-bottom:25px;
 }
 
 h1{
-font-size:60px;
-margin-top:0;
-margin-bottom:14px;
+font-size:58px;
+margin:0 0 16px 0;
 font-weight:600;
 }
 
 .tagline{
 font-size:22px;
-margin-bottom:18px;
+margin-bottom:20px;
 opacity:0.95;
 }
 
@@ -64,20 +70,23 @@ margin-bottom:16px;
 }
 
 .status-strip{
-margin-top:18px;
+margin-top:20px;
 font-size:14px;
 opacity:0.7;
 }
 
+/* BUTTONS */
+
 .buttons{
-margin-top:22px;
+margin-top:28px;
 display:flex;
+justify-content:center;
 gap:14px;
 flex-wrap:wrap;
 }
 
 .btn-primary{
-padding:15px 30px;
+padding:16px 34px;
 background:#229ED9;
 color:white;
 text-decoration:none;
@@ -87,7 +96,7 @@ font-size:15px;
 }
 
 .btn-secondary{
-padding:13px 26px;
+padding:14px 28px;
 background:#161616;
 border:1px solid #2a2a2a;
 color:#e6e6e6;
@@ -96,35 +105,28 @@ border-radius:6px;
 font-size:14px;
 }
 
+/* EMAIL */
+
 .email-box{
-margin-bottom:36px;
-padding:20px;
+margin-top:60px;
+padding:24px;
 border:1px solid #1a1a1a;
 background:#121212;
 border-radius:8px;
+max-width:520px;
+margin-left:auto;
+margin-right:auto;
 }
 
 .email-title{
 font-size:18px;
-margin-bottom:6px;
+margin-bottom:8px;
 }
 
 .email-desc{
 font-size:14px;
 opacity:0.8;
-margin-bottom:10px;
-}
-
-.ascend-btn{
-margin-top:10px;
-display:inline-block;
-padding:12px 22px;
-background:#229ED9;
-border-radius:5px;
-font-weight:600;
-font-size:14px;
-text-decoration:none;
-color:white;
+margin-bottom:12px;
 }
 
 .beehiiv-embed{
@@ -133,18 +135,29 @@ height:230px;
 border:0;
 }
 
+/* INSIDE */
+
+.inside{
+margin-top:80px;
+max-width:850px;
+margin-left:auto;
+margin-right:auto;
+}
+
 .section-title{
-font-size:20px;
-margin-bottom:18px;
+font-size:22px;
+margin-bottom:20px;
+text-align:center;
 }
 
 .block{
-margin-bottom:24px;
+margin-bottom:22px;
 }
 
 .block-title{
 font-size:16px;
 margin-bottom:6px;
+font-weight:500;
 }
 
 .item{
@@ -153,15 +166,18 @@ opacity:0.9;
 line-height:1.5;
 }
 
+/* RESULTS */
+
 .results{
-margin-top:80px;
+margin-top:90px;
 border-top:1px solid #1b1b1b;
 padding-top:60px;
 }
 
 .results-title{
 font-size:28px;
-margin-bottom:30px;
+text-align:center;
+margin-bottom:35px;
 }
 
 .results-grid{
@@ -175,12 +191,13 @@ background:#141414;
 border:1px solid #1e1e1e;
 padding:22px;
 border-radius:8px;
+text-align:center;
 }
 
 .result-amount{
 font-size:22px;
 font-weight:600;
-margin-bottom:6px;
+margin-bottom:8px;
 }
 
 .result-desc{
@@ -188,6 +205,8 @@ font-size:14px;
 opacity:0.85;
 line-height:1.5;
 }
+
+/* TELEGRAM BAR */
 
 .telegram-bar{
 position:fixed;
@@ -199,14 +218,14 @@ border-top:1px solid #1f1f1f;
 display:flex;
 justify-content:center;
 align-items:center;
-gap:30px;
+gap:20px;
 padding:10px;
 }
 
 .telegram-bar a{
 background:#229ED9;
 color:white;
-padding:9px 20px;
+padding:10px 22px;
 text-decoration:none;
 border-radius:4px;
 font-weight:600;
@@ -218,19 +237,12 @@ font-size:12px;
 opacity:0.7;
 }
 
-@media(max-width:900px){
+/* MOBILE */
 
-.hero{
-grid-template-columns:1fr;
-gap:50px;
-}
+@media(max-width:900px){
 
 .results-grid{
 grid-template-columns:1fr;
-}
-
-.container{
-padding:24px;
 }
 
 }
@@ -242,25 +254,162 @@ padding:24px;
 <body>
 
 <div class="nav">
-<div class="logo">Summit Capital</div>
+Summit Capital
 </div>
 
 <div class="container">
 
 <div class="hero">
 
-<div>
+<img src="logo.png" class="hero-logo">
 
 <h1>Summit Capital</h1>
 
 <p class="tagline">
-A private circle focused on building serious businesses in the digital economy.
+A private circle focused on building serious businesses in the digital economy
 </p>
 
 <p class="description">
-Most people remain stuck because they never learn the systems that actually create scale.
+Most people never learn the systems that actually create scale. They work hard but remain stuck because they do not understand distribution marketing and leverage.
 </p>
 
 <p class="description">
-Inside Summit Capital members learn how to grow companies using modern di
+Inside Summit Capital members learn how companies grow using paid media social platforms and modern acquisition systems.
+</p>
+
+<p class="description">
+Members share strategies that help businesses reach millions of customers and scale revenue faster.
+</p>
+
+<p class="description">
+The goal is simple. Help serious builders grow faster and reach levels that are extremely difficult to achieve alone.
+</p>
+
+<div class="status-strip">
+Private circle for founders builders and operators
+</div>
+
+<div class="buttons">
+
+<a href="https://t.me/+ye3SREW9w5FlMmNk" class="btn-primary">
+Join Free Telegram
+</a>
+
+<a href="circle.html" class="btn-secondary">
+Private Circle
+</a>
+
+</div>
+
+</div>
+
+
+<div class="email-box">
+
+<div class="email-title">
+Ascend
+</div>
+
+<div class="email-desc">
+Business strategy marketing intelligence and market insights
+</div>
+
+<script async src="https://subscribe-forms.beehiiv.com/embed.js"></script>
+
+<iframe
+src="https://subscribe-forms.beehiiv.com/a5972805-3d8f-4906-b434-1a1f5dcf3f33"
+class="beehiiv-embed"
+scrolling="no">
+</iframe>
+
+</div>
+
+
+<div class="inside">
+
+<div class="section-title">
+Inside Summit
+</div>
+
+<div class="block">
+<div class="block-title">Digital Distribution</div>
+<div class="item">
+Learn how brands reach massive audiences through social platforms and paid media
+</div>
+</div>
+
+<div class="block">
+<div class="block-title">Advertising Systems</div>
+<div class="item">
+Understand the campaigns and acquisition strategies used to scale companies
+</div>
+</div>
+
+<div class="block">
+<div class="block-title">Scaling Companies</div>
+<div class="item">
+Frameworks used by founders growing businesses through marketing and distribution
+</div>
+</div>
+
+<div class="block">
+<div class="block-title">Market Opportunities</div>
+<div class="item">
+Insights into crypto digital markets and emerging opportunities
+</div>
+</div>
+
+</div>
+
+
+<div class="results">
+
+<div class="results-title">
+What members are building
+</div>
+
+<div class="results-grid">
+
+<div class="result">
+<div class="result-amount">£12k per month</div>
+<div class="result-desc">
+Revenue from a digital brand scaled through paid acquisition
+</div>
+</div>
+
+<div class="result">
+<div class="result-amount">Scaling ad campaigns</div>
+<div class="result-desc">
+Members running advertising systems across major platforms
+</div>
+</div>
+
+<div class="result">
+<div class="result-amount">Leaving traditional jobs</div>
+<div class="result-desc">
+Builders creating companies that generate independent income
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="telegram-bar">
+
+<a href="https://t.me/+ye3SREW9w5FlMmNk">
+Join Free Telegram
+</a>
+
+<div class="stats-bottom">
+Private circle for founders and builders
+</div>
+
+</div>
+
+</body>
+</html>
 ```
