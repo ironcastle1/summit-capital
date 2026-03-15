@@ -21,33 +21,28 @@ color:#e6e6e6;
 display:grid;
 grid-template-columns:1fr auto 1fr;
 align-items:center;
-padding:16px 40px 6px 40px;
+padding:14px 40px 4px 40px;
 }
 
-.header-left{
-font-size:14px;
-font-weight:600;
-line-height:1.5;
-max-width:320px;
+.cred-left,
+.cred-right{
+font-size:13px;
+opacity:0.7;
+display:flex;
+gap:18px;
+align-items:center;
 }
 
-.header-right{
-text-align:right;
-font-size:14px;
-font-weight:600;
-line-height:1.5;
-max-width:320px;
-justify-self:end;
+.cred-right{
+justify-content:flex-end;
 }
 
-/* LOGO ZONE */
+/* LOGO */
 
 .logo-zone{
-position:relative;
 text-align:center;
+position:relative;
 }
-
-/* GOLD GLOW */
 
 .logo-zone::before{
 content:"";
@@ -55,13 +50,11 @@ position:absolute;
 top:-25px;
 left:50%;
 transform:translateX(-50%);
-width:440px;
-height:280px;
-background:radial-gradient(circle, rgba(255,210,120,0.20), transparent 70%);
+width:420px;
+height:260px;
+background:radial-gradient(circle, rgba(255,215,120,0.20), transparent 70%);
 filter:blur(40px);
 }
-
-/* SHIMMER ANIMATION */
 
 .logo{
 width:240px;
@@ -71,16 +64,16 @@ animation:shimmer 5s infinite linear;
 
 @keyframes shimmer{
 0%{filter:brightness(1)}
-50%{filter:brightness(1.25)}
+50%{filter:brightness(1.2)}
 100%{filter:brightness(1)}
 }
 
-/* SEPARATOR */
+/* DIVIDER */
 
 .divider{
 height:1px;
 background:#1a1a1a;
-margin-top:10px;
+margin-top:8px;
 }
 
 /* MAIN */
@@ -88,7 +81,7 @@ margin-top:10px;
 .container{
 max-width:1200px;
 margin:auto;
-padding:18px 30px 60px 30px;
+padding:12px 30px 60px 30px;
 }
 
 /* TWO COLUMN */
@@ -103,42 +96,41 @@ align-items:start;
 /* LEFT COLUMN */
 
 h1{
-font-size:56px;
+font-size:54px;
 margin-top:0;
-margin-bottom:14px;
+margin-bottom:12px;
 font-weight:700;
 }
 
 .tagline{
 font-size:22px;
-margin-bottom:18px;
-opacity:0.95;
+margin-bottom:16px;
 }
 
 .description{
 font-size:16px;
 line-height:1.7;
+margin-bottom:14px;
 opacity:0.92;
-margin-bottom:16px;
 }
 
 .status-strip{
-margin-top:18px;
+margin-top:14px;
 font-size:14px;
-opacity:0.75;
+opacity:0.7;
 }
 
 /* BUTTONS */
 
 .buttons{
-margin-top:22px;
+margin-top:18px;
 display:flex;
-gap:14px;
+gap:12px;
 flex-wrap:wrap;
 }
 
 .btn-primary{
-padding:15px 30px;
+padding:14px 28px;
 background:#229ED9;
 color:white;
 text-decoration:none;
@@ -148,7 +140,7 @@ font-size:15px;
 }
 
 .btn-secondary{
-padding:15px 30px;
+padding:14px 28px;
 background:#171717;
 border:1px solid #2a2a2a;
 color:#e6e6e6;
@@ -161,7 +153,7 @@ font-weight:600;
 /* CONSULTING BOX */
 
 .consult-box{
-margin-top:26px;
+margin-top:20px;
 padding:20px;
 background:#141414;
 border:1px solid #1e1e1e;
@@ -177,15 +169,14 @@ margin-bottom:8px;
 .consult-desc{
 font-size:14px;
 line-height:1.6;
-opacity:0.9;
-margin-bottom:14px;
+margin-bottom:10px;
 }
 
 /* EMAIL */
 
 .email-box{
-margin-bottom:28px;
-padding:22px;
+margin-bottom:24px;
+padding:20px;
 border:1px solid #1a1a1a;
 background:#121212;
 border-radius:8px;
@@ -212,60 +203,59 @@ border:0;
 
 .section-title{
 font-size:22px;
-margin-bottom:18px;
+margin-bottom:16px;
 }
 
 .block{
-margin-bottom:18px;
+margin-bottom:16px;
 }
 
 .block-title{
 font-size:16px;
-margin-bottom:5px;
 font-weight:600;
+margin-bottom:4px;
 }
 
 .item{
 font-size:14px;
-opacity:0.9;
 line-height:1.6;
+opacity:0.9;
 }
 
 /* RESULTS */
 
 .results{
-margin-top:55px;
+margin-top:40px;
 border-top:1px solid #1b1b1b;
-padding-top:40px;
+padding-top:36px;
 }
 
 .results-title{
-font-size:26px;
-margin-bottom:28px;
+font-size:24px;
+margin-bottom:22px;
 }
 
 .results-grid{
 display:grid;
 grid-template-columns:1fr 1fr 1fr;
-gap:26px;
+gap:22px;
 }
 
 .result{
 background:#141414;
 border:1px solid #1e1e1e;
-padding:22px;
+padding:20px;
 border-radius:8px;
 }
 
 .result-amount{
-font-size:20px;
+font-size:18px;
 font-weight:600;
 margin-bottom:6px;
 }
 
 .result-desc{
 font-size:14px;
-opacity:0.9;
 line-height:1.6;
 }
 
@@ -317,7 +307,7 @@ width:180px;
 }
 
 h1{
-font-size:42px;
+font-size:40px;
 }
 
 .header{
@@ -326,8 +316,12 @@ gap:10px;
 text-align:center;
 }
 
-.header-right{
-text-align:center;
+.cred-right{
+justify-content:center;
+}
+
+.cred-left{
+justify-content:center;
 }
 
 }
@@ -340,28 +334,27 @@ text-align:center;
 
 <div class="header">
 
-<div class="header-left">
-Serious builders scaling companies through marketing distribution and modern digital leverage
+<div class="cred-left">
+<span>Strategic Consulting</span>
+<span>Business Growth Systems</span>
 </div>
 
 <div class="logo-zone">
 <img src="logo.png" class="logo">
 </div>
 
-<div class="header-right">
-Strategies insights and connections that help founders grow faster and reach higher levels
+<div class="cred-right">
+<span>Digital Distribution Strategy</span>
+<span>Private Founder Circle</span>
 </div>
 
 </div>
 
 <div class="divider"></div>
 
-
 <div class="container">
 
 <div class="hero">
-
-<!-- LEFT -->
 
 <div>
 
@@ -383,10 +376,6 @@ Inside Summit Capital members learn how companies grow using paid media social p
 Members share strategies that help businesses reach millions of customers and scale revenue faster.
 </p>
 
-<p class="description">
-The goal is simple help serious builders grow faster and reach levels that are extremely difficult to achieve alone.
-</p>
-
 <div class="status-strip">
 Private circle for founders builders and operators
 </div>
@@ -403,7 +392,6 @@ Join Free Telegram
 
 </div>
 
-
 <div class="consult-box">
 
 <div class="consult-title">
@@ -411,19 +399,17 @@ Private Consulting
 </div>
 
 <div class="consult-desc">
-Work directly with Summit Capital through focused one to one sessions. These calls are designed for founders who want clear direction on scaling businesses using advertising digital distribution and modern marketing systems.
+Work directly with Summit Capital through focused one to one strategy sessions designed to help founders scale businesses using marketing distribution and acquisition systems.
 </div>
 
 <div class="consult-desc">
-Sessions focus on identifying growth bottlenecks improving acquisition strategy and building systems capable of producing consistent revenue growth.
+Sessions identify growth bottlenecks refine customer acquisition strategy and help build systems capable of producing consistent revenue expansion.
 </div>
 
 </div>
 
 </div>
 
-
-<!-- RIGHT -->
 
 <div>
 
@@ -453,67 +439,28 @@ Inside Summit
 
 <div class="block">
 <div class="block-title">Digital Distribution</div>
-<div class="item">
-Learn how brands reach massive audiences through social platforms and paid media
-</div>
+<div class="item">Learn how brands reach massive audiences through social platforms and paid media</div>
 </div>
 
 <div class="block">
 <div class="block-title">Advertising Systems</div>
-<div class="item">
-Understand the campaigns and acquisition strategies used to scale companies
-</div>
+<div class="item">Understand the campaigns and acquisition strategies used to scale companies</div>
 </div>
 
 <div class="block">
 <div class="block-title">Scaling Businesses</div>
-<div class="item">
-Frameworks used by founders growing companies through marketing and distribution
-</div>
+<div class="item">Frameworks used by founders growing companies through marketing and distribution</div>
 </div>
 
 <div class="block">
 <div class="block-title">Market Opportunities</div>
-<div class="item">
-Insights into crypto digital markets and emerging opportunities
-</div>
+<div class="item">Insights into crypto digital markets and emerging opportunities</div>
 </div>
 
 </div>
 
 </div>
 
-
-<div class="results">
-
-<div class="results-title">
-What members are building
-</div>
-
-<div class="results-grid">
-
-<div class="result">
-<div class="result-amount">£12k per month</div>
-<div class="result-desc">
-Revenue from a digital brand scaled through paid acquisition
-</div>
-</div>
-
-<div class="result">
-<div class="result-amount">Scaling ad campaigns</div>
-<div class="result-desc">
-Members running advertising systems across major platforms
-</div>
-</div>
-
-<div class="result">
-<div class="result-amount">Leaving traditional jobs</div>
-<div class="result-desc">
-Builders creating companies that generate independent income
-</div>
-</div>
-
-</div>
 
 </div>
 
