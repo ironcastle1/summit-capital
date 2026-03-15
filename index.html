@@ -11,7 +11,7 @@
 body{
 margin:0;
 font-family:'Inter', sans-serif;
-background:#0f0f0f;
+background:#0d0d0d;
 color:#e6e6e6;
 }
 
@@ -21,17 +21,18 @@ color:#e6e6e6;
 display:flex;
 justify-content:space-between;
 align-items:center;
-padding:18px 42px;
-border-bottom:1px solid #1b1b1b;
+padding:22px 60px;
+border-bottom:1px solid #1a1a1a;
 }
 
 .logo{
 font-size:18px;
 font-weight:600;
+letter-spacing:0.4px;
 }
 
 .nav-links a{
-margin-left:28px;
+margin-left:32px;
 text-decoration:none;
 color:#bdbdbd;
 font-size:14px;
@@ -44,9 +45,9 @@ color:white;
 /* MAIN */
 
 .container{
-max-width:1100px;
-margin:20px auto;
-padding:20px;
+max-width:1300px;
+margin:40px auto;
+padding:40px;
 }
 
 /* HERO */
@@ -54,34 +55,34 @@ padding:20px;
 .hero{
 display:grid;
 grid-template-columns:1fr 1fr;
-gap:70px;
+gap:90px;
 align-items:start;
 }
 
 h1{
-font-size:54px;
+font-size:60px;
 margin-top:0;
 margin-bottom:12px;
 font-weight:600;
 }
 
 .tagline{
-font-size:20px;
-margin-bottom:14px;
+font-size:22px;
+margin-bottom:18px;
 opacity:0.9;
 }
 
 .description{
 font-size:16px;
-line-height:1.6;
+line-height:1.7;
 opacity:0.75;
-margin-bottom:14px;
+margin-bottom:16px;
 }
 
 .capabilities{
-margin:16px 0;
+margin:20px 0;
 display:flex;
-gap:24px;
+gap:26px;
 }
 
 .capability{
@@ -92,56 +93,56 @@ opacity:0.85;
 /* BUTTONS */
 
 .buttons{
-margin-top:12px;
+margin-top:18px;
 display:flex;
-gap:12px;
+gap:14px;
 flex-wrap:wrap;
 }
 
 .btn-primary{
-padding:13px 26px;
+padding:14px 28px;
 background:#229ED9;
 color:white;
 text-decoration:none;
 font-weight:600;
-border-radius:4px;
+border-radius:5px;
 font-size:14px;
 }
 
 .btn-secondary{
-padding:11px 22px;
-background:#1a1a1a;
-border:1px solid #333;
+padding:12px 24px;
+background:#161616;
+border:1px solid #2a2a2a;
 color:#e6e6e6;
 text-decoration:none;
-border-radius:4px;
+border-radius:5px;
 font-size:14px;
 }
 
 /* EMAIL BOX */
 
 .email-box{
-margin-bottom:30px;
-padding:14px;
-border:1px solid #1e1e1e;
-background:rgba(30,30,30,0.6);
-border-radius:6px;
+margin-bottom:36px;
+padding:20px;
+border:1px solid #1a1a1a;
+background:#121212;
+border-radius:8px;
 }
 
 .email-title{
 font-size:16px;
-margin-bottom:4px;
+margin-bottom:6px;
 }
 
 .email-desc{
 font-size:13px;
 opacity:0.65;
-margin-bottom:8px;
+margin-bottom:10px;
 }
 
 .beehiiv-embed{
 width:100%;
-height:280px;
+height:260px;
 border:0;
 }
 
@@ -149,11 +150,11 @@ border:0;
 
 .section-title{
 font-size:20px;
-margin-bottom:16px;
+margin-bottom:18px;
 }
 
 .block{
-margin-bottom:22px;
+margin-bottom:24px;
 }
 
 .block-title{
@@ -163,62 +164,70 @@ margin-bottom:6px;
 
 .item{
 font-size:14px;
-opacity:0.85;
+opacity:0.8;
 margin-bottom:6px;
+line-height:1.5;
 }
 
-/* THESIS SECTION */
+/* THESIS */
 
 .thesis{
-margin-top:70px;
+margin-top:90px;
 border-top:1px solid #1b1b1b;
-padding-top:60px;
-max-width:720px;
+padding-top:70px;
+max-width:760px;
 }
 
 .thesis-title{
-font-size:28px;
-margin-bottom:20px;
+font-size:30px;
+margin-bottom:22px;
 }
 
 .thesis p{
 opacity:0.8;
 line-height:1.7;
-margin-bottom:16px;
+margin-bottom:18px;
 }
 
 /* INSIGHTS */
 
 .insights{
-margin-top:70px;
+margin-top:90px;
 }
 
 .insights-title{
-font-size:26px;
-margin-bottom:25px;
+font-size:28px;
+margin-bottom:30px;
 }
 
 .insight-grid{
 display:grid;
 grid-template-columns:1fr 1fr 1fr;
-gap:24px;
+gap:26px;
 }
 
 .insight{
 border:1px solid #1e1e1e;
 background:#141414;
-padding:18px;
-border-radius:6px;
+padding:22px;
+border-radius:8px;
+transition:all .15s ease;
+}
+
+.insight:hover{
+border-color:#2c2c2c;
+background:#161616;
 }
 
 .insight-title{
 font-size:17px;
-margin-bottom:6px;
+margin-bottom:8px;
 }
 
 .insight-desc{
 font-size:14px;
 opacity:0.7;
+line-height:1.5;
 }
 
 .insight a{
@@ -226,45 +235,50 @@ text-decoration:none;
 color:#e6e6e6;
 }
 
-/* FLOAT BAR */
+/* TELEGRAM BAR */
 
 .telegram-bar{
 position:fixed;
 bottom:0;
 left:0;
 width:100%;
-background:#0c0c0c;
-border-top:1px solid #222;
+background:#0a0a0a;
+border-top:1px solid #1f1f1f;
 display:flex;
 justify-content:center;
 align-items:center;
 gap:30px;
-padding:12px;
+padding:10px;
 }
 
 .telegram-bar a{
 background:#229ED9;
 color:white;
-padding:10px 22px;
+padding:9px 20px;
 text-decoration:none;
 border-radius:4px;
 font-weight:600;
-font-size:14px;
+font-size:13px;
 }
 
 .stats-bottom{
 font-size:12px;
-opacity:0.75;
+opacity:0.7;
 }
 
 @media(max-width:900px){
 
 .hero{
 grid-template-columns:1fr;
+gap:50px;
 }
 
 .insight-grid{
 grid-template-columns:1fr;
+}
+
+.container{
+padding:24px;
 }
 
 }
@@ -288,8 +302,6 @@ grid-template-columns:1fr;
 <div class="container">
 
 <div class="hero">
-
-<!-- LEFT -->
 
 <div>
 
@@ -326,8 +338,6 @@ Private Circle
 </div>
 
 </div>
-
-<!-- RIGHT -->
 
 <div>
 
@@ -379,8 +389,6 @@ Inside the Network
 
 </div>
 
-<!-- DISTRIBUTION THESIS -->
-
 <div class="thesis">
 
 <div class="thesis-title">
@@ -412,8 +420,6 @@ The goal is simple: understand how modern companies actually grow.
 </p>
 
 </div>
-
-<!-- INSIGHTS -->
 
 <div class="insights">
 
