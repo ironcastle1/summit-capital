@@ -4,7 +4,7 @@
 
 <title>Summit Capital</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
 
@@ -21,45 +21,58 @@ color:#e6e6e6;
 display:grid;
 grid-template-columns:1fr auto 1fr;
 align-items:center;
-padding:18px 40px 8px 40px;
-position:relative;
+padding:16px 40px 6px 40px;
 }
 
 .header-left{
-font-size:13px;
-opacity:0.7;
+font-size:14px;
+font-weight:600;
+line-height:1.5;
+max-width:320px;
 }
 
 .header-right{
 text-align:right;
-font-size:13px;
-opacity:0.7;
+font-size:14px;
+font-weight:600;
+line-height:1.5;
+max-width:320px;
+justify-self:end;
 }
 
-/* LOGO GLOW */
+/* LOGO ZONE */
 
 .logo-zone{
-text-align:center;
 position:relative;
+text-align:center;
 }
+
+/* GOLD GLOW */
 
 .logo-zone::before{
 content:"";
 position:absolute;
-top:-20px;
+top:-25px;
 left:50%;
 transform:translateX(-50%);
-width:420px;
-height:260px;
-background:radial-gradient(circle, rgba(255,215,120,0.15), transparent 70%);
+width:440px;
+height:280px;
+background:radial-gradient(circle, rgba(255,210,120,0.20), transparent 70%);
 filter:blur(40px);
-z-index:0;
 }
 
+/* SHIMMER ANIMATION */
+
 .logo{
-width:230px;
+width:240px;
 position:relative;
-z-index:1;
+animation:shimmer 5s infinite linear;
+}
+
+@keyframes shimmer{
+0%{filter:brightness(1)}
+50%{filter:brightness(1.25)}
+100%{filter:brightness(1)}
 }
 
 /* SEPARATOR */
@@ -67,7 +80,7 @@ z-index:1;
 .divider{
 height:1px;
 background:#1a1a1a;
-margin-top:14px;
+margin-top:10px;
 }
 
 /* MAIN */
@@ -75,7 +88,7 @@ margin-top:14px;
 .container{
 max-width:1200px;
 margin:auto;
-padding:28px 30px 60px 30px;
+padding:18px 30px 60px 30px;
 }
 
 /* TWO COLUMN */
@@ -87,13 +100,13 @@ gap:70px;
 align-items:start;
 }
 
-/* LEFT */
+/* LEFT COLUMN */
 
 h1{
 font-size:56px;
 margin-top:0;
 margin-bottom:14px;
-font-weight:600;
+font-weight:700;
 }
 
 .tagline{
@@ -105,14 +118,14 @@ opacity:0.95;
 .description{
 font-size:16px;
 line-height:1.7;
-opacity:0.9;
+opacity:0.92;
 margin-bottom:16px;
 }
 
 .status-strip{
 margin-top:18px;
 font-size:14px;
-opacity:0.7;
+opacity:0.75;
 }
 
 /* BUTTONS */
@@ -135,13 +148,37 @@ font-size:15px;
 }
 
 .btn-secondary{
-padding:13px 26px;
-background:#161616;
+padding:15px 30px;
+background:#171717;
 border:1px solid #2a2a2a;
 color:#e6e6e6;
 text-decoration:none;
 border-radius:6px;
+font-size:15px;
+font-weight:600;
+}
+
+/* CONSULTING BOX */
+
+.consult-box{
+margin-top:26px;
+padding:20px;
+background:#141414;
+border:1px solid #1e1e1e;
+border-radius:8px;
+}
+
+.consult-title{
+font-size:18px;
+font-weight:600;
+margin-bottom:8px;
+}
+
+.consult-desc{
 font-size:14px;
+line-height:1.6;
+opacity:0.9;
+margin-bottom:14px;
 }
 
 /* EMAIL */
@@ -185,7 +222,7 @@ margin-bottom:18px;
 .block-title{
 font-size:16px;
 margin-bottom:5px;
-font-weight:500;
+font-weight:600;
 }
 
 .item{
@@ -197,9 +234,9 @@ line-height:1.6;
 /* RESULTS */
 
 .results{
-margin-top:60px;
+margin-top:55px;
 border-top:1px solid #1b1b1b;
-padding-top:45px;
+padding-top:40px;
 }
 
 .results-title{
@@ -285,8 +322,8 @@ font-size:42px;
 
 .header{
 grid-template-columns:1fr;
+gap:10px;
 text-align:center;
-gap:8px;
 }
 
 .header-right{
@@ -304,7 +341,7 @@ text-align:center;
 <div class="header">
 
 <div class="header-left">
-Private capital circle
+Serious builders scaling companies through marketing distribution and modern digital leverage
 </div>
 
 <div class="logo-zone">
@@ -312,7 +349,7 @@ Private capital circle
 </div>
 
 <div class="header-right">
-Builders founders operators
+Strategies insights and connections that help founders grow faster and reach higher levels
 </div>
 
 </div>
@@ -324,7 +361,7 @@ Builders founders operators
 
 <div class="hero">
 
-<!-- LEFT COLUMN -->
+<!-- LEFT -->
 
 <div>
 
@@ -360,16 +397,33 @@ Private circle for founders builders and operators
 Join Free Telegram
 </a>
 
-<a href="circle.html" class="btn-secondary">
-Private Circle
+<a href="#" class="btn-secondary">
+1 to 1 Consulting
 </a>
 
 </div>
 
+
+<div class="consult-box">
+
+<div class="consult-title">
+Private Consulting
+</div>
+
+<div class="consult-desc">
+Work directly with Summit Capital through focused one to one sessions. These calls are designed for founders who want clear direction on scaling businesses using advertising digital distribution and modern marketing systems.
+</div>
+
+<div class="consult-desc">
+Sessions focus on identifying growth bottlenecks improving acquisition strategy and building systems capable of producing consistent revenue growth.
+</div>
+
+</div>
+
 </div>
 
 
-<!-- RIGHT COLUMN -->
+<!-- RIGHT -->
 
 <div>
 
