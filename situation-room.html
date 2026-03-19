@@ -1,115 +1,84 @@
-<!DOCTYPE html>
-<html>
-<head>
-<title>Situation Room - Summit Capital</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<style>
-body {
-  margin:0;
-  font-family:Arial, sans-serif;
-  background:#0d0d0d;
-  color:#fff;
-}
-
-.header {
-  padding:12px;
-  text-align:center;
-  background:#111;
-  font-weight:bold;
-}
-
-#map {
-  height:60vh;
-  width:100%;
-}
-
-.panel {
-  padding:15px;
-}
-
-.item {
-  background:#151515;
-  padding:10px;
-  margin-bottom:10px;
-  border-radius:6px;
-}
-</style>
-</head>
-
-<body>
-
-<div class="header">SUMMIT CAPITAL — SITUATION ROOM</div>
-
-<div id="map"></div>
-
-<div class="panel" id="intel"></div>
+<!-- ADD THIS RIGHT BEFORE CLOSING </body> TAG -->
 
 <script>
-// -------- MAP --------
-function initMap() {
+let map;
+let markers = [];
+let activeLayer = "all";
 
-  const map = new google.maps.Map(document.getElementById("map"), {
+function initMap() {
+  map = new google.maps.Map(document.getElementById("map"), {
     center: { lat: 20, lng: 0 },
     zoom: 2,
     styles: [
-      { elementType: "geometry", stylers: [{ color: "#0d0d0d" }] },
-      { elementType: "labels.text.stroke", stylers: [{ color: "#0d0d0d" }] },
-      { elementType: "labels.text.fill", stylers: [{ color: "#888" }] }
-    ]
+      { elementType: "geometry", stylers: [{ color: "#020508" }] },
+      { elementType: "labels.text.stroke", stylers: [{ color: "#020508" }] },
+      { elementType: "labels.text.fill", stylers: [{ color: "#3a5570" }] }
+    ],
+    disableDefaultUI: true
   });
 
-  const events = [
-    {lat:40.7,lng:-74.0,title:"US Market Volatility"},
-    {lat:51.5,lng:-0.1,title:"London M&A Activity"},
-    {lat:35.7,lng:139.7,title:"Japan Policy Hold"},
-    {lat:29.9,lng:32.5,title:"Suez Disruption"},
-    {lat:25.2,lng:55.3,title:"Gulf Capital Deployment"}
-  ];
+  renderMarkers();
+  document.getElementById("evtbadge").innerText = EVENTS.length + " EVENTS";
+}
 
-  events.forEach(e => {
+function renderMarkers() {
+  markers.forEach(m => m.setMap(null));
+  markers = [];
+
+  EVENTS.forEach(ev => {
+    if (activeLayer !== "all" && ev.type !== activeLayer) return;
+
     const marker = new google.maps.Marker({
-      position: {lat:e.lat, lng:e.lng},
+      position: { lat: ev.lat, lng: ev.lng },
       map: map,
-      title: e.title
+      title: ev.title
     });
 
-    const info = new google.maps.InfoWindow({
-      content: `<div style="color:#000">${e.title}</div>`
+    const infowindow = new google.maps.InfoWindow({
+      content: `
+        <div class="pop-wrap">
+          <div class="pop-region">${ev.region}</div>
+          <div class="pop-title">${ev.title}</div>
+          <div class="pop-body">${ev.body}</div>
+        </div>
+      `
     });
 
     marker.addListener("click", () => {
-      info.open(map, marker);
+      infowindow.open(map, marker);
     });
+
+    markers.push(marker);
   });
 }
 
-// -------- INTEL FEED --------
-function loadIntel(){
-  const intel = [
-    "Fed signalling rate pause",
-    "Energy markets stabilising",
-    "AI stocks accelerating growth",
-    "Shipping routes disrupted globally"
-  ];
-
-  const container = document.getElementById("intel");
-  container.innerHTML = "";
-
-  intel.forEach(i=>{
-    const div = document.createElement("div");
-    div.className="item";
-    div.innerText = i;
-    container.appendChild(div);
-  });
+function setLayer(layer, el) {
+  activeLayer = layer;
+  document.querySelectorAll(".mf").forEach(b => b.classList.remove("active"));
+  el.classList.add("active");
+  renderMarkers();
 }
 
-loadIntel();
+function setMapType(type) {
+  map.setMapTypeId(type);
+  document.querySelectorAll(".mt-btn").forEach(b => b.classList.remove("active"));
+  document.getElementById("btn-" + type).classList.add("active");
+}
+
+function toggleSide() {
+  document.getElementById("side").classList.toggle("open");
+}
+
+function sw(tab) {
+  document.querySelectorAll(".ss").forEach(s => s.classList.remove("active"));
+  document.querySelectorAll(".stab").forEach(s => s.classList.remove("active"));
+
+  document.getElementById("ss-" + tab).classList.add("active");
+  document.getElementById("stab-" + tab).classList.add("active");
+}
 </script>
 
+<!-- GOOGLE MAPS (REQUIRED FIX) -->
 <script async
-src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB6zKmCvtD3rU7yEhFJjP5bZf0-16A9vm8&callback=initMap">
+src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap">
 </script>
-
-</body>
-</html>
