@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Summit Capital — Situation Room</title>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@400;600;700&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#020508; --panel:#070c13; --panel2:#0a1220;
+  --border:#0e2040; --bhi:#1a4080;
+  --gold:#c9a84c; --cyan:#00d4ff; --green:#00ff88;
+  --red:#ff3344; --orange:#ff8800; --purple:#aa44ff;
+  --energy:#ff6600;
+  --text:#a8c4d4; --tdim:#3a5570; --tbright:#d4eaf4;
+  --mono:'Share Tech Mono',monospace;
+  --ui:'Rajdhani',sans-serif;
+  --disp:'Orbitron',monospace;
+  --side-w: 300px;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+
+html, body { height:100%; width:100%; overflow:hidden; background:var(--bg); color:var(--text); font-family:var(--ui); display:flex; flex-direction:column; }
+
+/* HEADER, TICKER, BODY, SIDE PANEL, MAP UI CSS */
+/* (reuse all your styles from the previous code) */
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="hdr">
+  <div class="logo"><div class="ldot"></div>SUMMIT CAPITAL</div>
+  <div class="hdr-mid">SITUATION ROOM // GLOBAL INTELLIGENCE</div>
+  <div class="hdr-r">
+    <div class="live"><div class="livdot"></div>LIVE</div>
+    <div id="clk" style="color:var(--tdim);font-family:var(--mono);font-size:10px"></div>
+  </div>
+</div>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker-lbl">MARKETS</div>
+  <div style="overflow:hidden;flex:1"><div class="ticker-track" id="tkr"></div></div>
+</div>
+
+<!-- BODY -->
+<div class="body">
+  <div id="map"></div>
+  <div class="map-ui">
+    <div class="map-filters" id="map-filters">
+      <div class="mf active" onclick="setLayer('all',this)">ALL</div>
+      <div class="mf" onclick="setLayer('breaking',this)">⚡ BREAKING</div>
+      <div class="mf" onclick="setLayer('market',this)">📈 MARKET</div>
+      <div class="mf" onclick="setLayer('trade',this)">🚢 TRADE</div>
+      <div class="mf" onclick="setLayer('energy',this)">🔥 ENERGY</div>
+      <div class="mf" onclick="setLayer('geo',this)">🌐 GEO</div>
+      <div class="mf" onclick="setLayer('merger',this)">💼 M&A</div>
+    </div>
+    <div class="evt-badge" id="evtbadge">LOADING MAP...</div>
+    <div class="map-legend">
+      <div class="li"><div class="ld" style="background:var(--red)"></div>BREAKING NEWS</div>
+      <div class="li"><div class="ld" style="background:var(--gold)"></div>MARKET / M&A</div>
+      <div class="li"><div class="ld" style="background:var(--cyan)"></div>TRADE / PORTS</div>
+      <div class="li"><div class="ld" style="background:var(--energy)"></div>ENERGY ASSET</div>
+      <div class="li"><div class="ld" style="background:var(--orange)"></div>GEO / POLITICS</div>
+    </div>
+    <div class="map-type-toggle">
+      <div class="mt-btn active" id="btn-roadmap" onclick="setMapType('roadmap')">MAP</div>
+      <div class="mt-btn" id="btn-satellite" onclick="setMapType('satellite')">SATELLITE</div>
+      <div class="mt-btn" id="btn-terrain" onclick="setMapType('terrain')">TERRAIN</div>
+    </div>
+  </div>
+
+  <!-- SIDE PANEL -->
+  <div class="side" id="side">
+    <div class="side-handle" onclick="toggleSide()">
+      <div style="width:32px;height:3px;background:var(--bhi);border-radius:2px"></div>
+    </div>
+    <div class="stabs">
+      <div class="stab active" onclick="sw('crypto')" id="stab-crypto">₿ CRYPTO</div>
+      <div class="stab" onclick="sw('intel')"  id="stab-intel">INTEL</div>
+    </div>
+    <div class="ss active" id="ss-crypto">
+      <div class="scrl">
+        <div class="sh"><div class="sht">Crypto Markets</div><div class="shb">LIVE</div></div>
+        <div id="crypto-list"></div>
+      </div>
+    </div>
+    <div class="ss" id="ss-intel">
+      <div class="scrl">
+        <div class="sh"><div class="sht">Global Business News</div><div class="shb">LIVE</div></div>
+        <div id="intel-list"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<button class="mob-toggle" id="mob-btn" onclick="toggleSide()">◆ INTEL</button>
+
+<script>
+// ── CLOCK ──
+function updateClock(){ let now=new Date(); document.getElementById('clk').innerText=now.toLocaleTimeString(); }
+setInterval(updateClock,1000); updateClock();
+
+// ── CRYPTO DATA ──
+async function fetchCrypto(){
+  const resp = await fetch('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=bitcoin,ethereum,solana,binancecoin,ripple,avalache,polkadot,chainlink');
+  const data = await resp.json();
+  const container = document.getElementById('crypto-list');
+  container.innerHTML='';
+  data.forEach(c=>{
+    let change = c.price_change_percentage_24h>=0 ? 'up' : 'dn';
+    container.innerHTML+=`
+      <div class="cc">
+        <div class="cr">
+          <div class="csym">${c.symbol.toUpperCase()}</div>
+          <div class="cpr">${c.current_price.toLocaleString()}</div>
+        </div>
+        <div class="cm"><div class="${change}">${c.price_change_percentage_24h.toFixed(2)}%</div><div>${c.market_cap.toLocaleString()}</div></div>
+      </div>
+    `;
+  });
+}
+
+// ── NEWS DATA ──
+async function fetchNews(){
+  const resp = await fetch('https://rss.nytimes.com/services/xml/rss/nyt/Business.xml');
+  const text = await resp.text();
+  const parser = new DOMParser();
+  const xml = parser.parseFromString(text,"text/xml");
+  const items = xml.querySelectorAll("item");
+  const container = document.getElementById('intel-list');
+  container.innerHTML='';
+  items.forEach((item,i)=>{
+    if(i>=10) return; // top 10 headlines
+    const title=item.querySelector('title').textContent;
+    const link=item.querySelector('link').textContent;
+    container.innerHTML+=`
+      <div class="ic market">
+        <div class="ihl"><a href="${link}" target="_blank" style="color:var(--tbright);text-decoration:none">${title}</a></div>
+      </div>
+    `;
+  });
+}
+
+// ── INIT ──
+async function init(){
+  await fetchCrypto();
+  await fetchNews();
+  setInterval(fetchCrypto,60000); // every 1 min
+  setInterval(fetchNews,60000);
+}
+init();
+
+// ── TAB / SIDE PANEL FUNCTIONS ──
+function sw(id){document.querySelectorAll('.ss').forEach(s=>s.classList.remove('active'));document.getElementById('ss-'+id).classList.add('active');document.querySelectorAll('.stab').forEach(t=>t.classList.remove('active'));document.getElementById('stab-'+id).classList.add('active');}
+function toggleSide(){document.getElementById('side').classList.toggle('open');}
+
+// ── MAP PLACEHOLDER ──
+function setLayer(l){console.log('Filter:',l);}
+function setMapType(t){console.log('Map type:',t);}
+</script>
+
+</body>
+</html>
