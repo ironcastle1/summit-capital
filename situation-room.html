@@ -1,84 +1,1075 @@
-<!-- ADD THIS RIGHT BEFORE CLOSING </body> TAG -->
+<!DOCTYPE html>
+<html>
+<head>
 
-<script>
-let map;
-let markers = [];
-let activeLayer = "all";
+<title>Situation Room — Summit Capital</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-function initMap() {
-  map = new google.maps.Map(document.getElementById("map"), {
-    center: { lat: 20, lng: 0 },
-    zoom: 2,
-    styles: [
-      { elementType: "geometry", stylers: [{ color: "#020508" }] },
-      { elementType: "labels.text.stroke", stylers: [{ color: "#020508" }] },
-      { elementType: "labels.text.fill", stylers: [{ color: "#3a5570" }] }
-    ],
-    disableDefaultUI: true
-  });
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Share+Tech+Mono&family=Rajdhani:wght@400;600;700&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
 
-  renderMarkers();
-  document.getElementById("evtbadge").innerText = EVENTS.length + " EVENTS";
+<style>
+
+*{ box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background: #0d0d0d;
+  color: #e6e6e6;
+  overflow-x: hidden;
 }
 
-function renderMarkers() {
-  markers.forEach(m => m.setMap(null));
-  markers = [];
+.header {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  padding: 10px 40px 4px 40px;
+}
 
-  EVENTS.forEach(ev => {
-    if (activeLayer !== "all" && ev.type !== activeLayer) return;
+.cred-left,
+.cred-right {
+  font-size: 13px;
+  opacity: 0.75;
+  display: flex;
+  gap: 20px;
+}
 
-    const marker = new google.maps.Marker({
-      position: { lat: ev.lat, lng: ev.lng },
-      map: map,
-      title: ev.title
+.cred-right { justify-content: flex-end; }
+
+.logo-zone {
+  text-align: center;
+  position: relative;
+}
+
+.logo-zone::before {
+  content: "";
+  position: absolute;
+  top: -25px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 420px;
+  height: 260px;
+  background: radial-gradient(circle, rgba(255,215,120,0.20), transparent 70%);
+  filter: blur(40px);
+  pointer-events: none;
+}
+
+.logo {
+  width: 240px;
+  position: relative;
+  animation: shimmer 5s infinite linear;
+}
+
+@keyframes shimmer {
+  0%   { filter: brightness(1); }
+  50%  { filter: brightness(1.15); }
+  100% { filter: brightness(1); }
+}
+
+.divider {
+  height: 1px;
+  background: #1a1a1a;
+  margin-top: 6px;
+}
+
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 40px;
+  font-size: 13px;
+  opacity: 0.6;
+  border-bottom: 1px solid #141414;
+}
+
+.breadcrumb a {
+  color: #e6e6e6;
+  text-decoration: none;
+}
+
+.breadcrumb a:hover { opacity: 1; text-decoration: underline; }
+.breadcrumb span { opacity: 0.4; }
+
+#situation-root {
+  width: 100%;
+  height: calc(100vh - 120px);
+  min-height: 600px;
+  position: relative;
+}
+
+.telegram-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: #0a0a0a;
+  border-top: 1px solid #1f1f1f;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  padding: 12px;
+  z-index: 9999;
+}
+
+.telegram-bar a {
+  background: #229ED9;
+  color: white;
+  padding: 10px 24px;
+  text-decoration: none;
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.stats-bottom {
+  font-size: 12px;
+  opacity: 0.7;
+}
+
+@media(max-width: 900px) {
+  .logo { width: 180px; }
+  .header {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 10px;
+  }
+  .cred-left, .cred-right { justify-content: center; }
+  .breadcrumb { padding: 8px 16px; }
+  #situation-root { height: calc(100vh - 130px); }
+}
+
+#situation-root * { box-sizing: border-box; }
+
+@keyframes sr-pulse    { 0%,100%{opacity:1} 50%{opacity:0.3} }
+@keyframes sr-ticker   { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+@keyframes sr-nfade    { 0%{opacity:0;transform:translateY(6px)} 20%{opacity:1;transform:translateY(0)} 80%{opacity:1} 100%{opacity:0} }
+@keyframes sr-spin     { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
+
+#situation-root ::-webkit-scrollbar { width: 2px; }
+#situation-root ::-webkit-scrollbar-thumb { background: #1a4080; }
+
+</style>
+
+</head>
+<body>
+
+<div class="header">
+  <div class="cred-left">
+    <span>Digital Marketing Strategy</span>
+    <span>Advertising Systems</span>
+  </div>
+  <div class="logo-zone">
+    <img src="logo.png" class="logo" alt="Summit Capital">
+  </div>
+  <div class="cred-right">
+    <span>Audience Growth</span>
+    <span>Digital Distribution</span>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<div class="breadcrumb">
+  <a href="index.html">Summit Capital</a>
+  <span>›</span>
+  <span style="opacity:1; color:#c9a84c;">Situation Room</span>
+</div>
+
+<div id="situation-root"></div>
+
+<div class="telegram-bar">
+  <a href="https://t.me/+ye3SREW9w5FlMmNk">Join Free Telegram</a>
+  <div class="stats-bottom">Private circle for builders growing digital businesses</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/react@18/umd/react.production.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/react-dom@18/umd/react-dom.production.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@babel/standalone/babel.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/topojson-client@3/dist/topojson-client.min.js"></script>
+
+<script type="text/babel">
+
+const { useState, useEffect, useRef, useCallback } = React;
+
+const G="#00ff88",R="#ff3344",O="#ff8800",C="#00d4ff",GR="#00ff88";
+const COL_BREAKING="#ff1744",COL_WAR="#ff6d00",COL_MILITARY="#ffd600";
+const COL_DISASTER="#69f0ae",COL_MARKET="#c9a84c",COL_TRADE="#00e5ff";
+const COL_ENERGY="#76ff03",COL_GEO="#e040fb",COL_MERGER="#ff4081";
+const TC={breaking:COL_BREAKING,war:COL_WAR,military:COL_MILITARY,
+  disaster:COL_DISASTER,market:COL_MARKET,trade:COL_TRADE,
+  energy:COL_ENERGY,geo:COL_GEO,merger:COL_MERGER};
+
+const EVENTS=[
+  {lat:40.7,lng:-74.0,type:"market",region:"New York",title:"NYSE VOLATILITY WATCH",plain:"S&P 500 VIX elevated as institutional selling hits financials and tech. Fed policy uncertainty driving risk-off.",beginner:["VIX above 20 = fear zone. Buy quality stocks in small amounts during spikes."],trader:["Long UVXY or VIX calls for volatility play."],biz:["Volatility events are wealth transfer moments. Cold email prospects now."],now:"Check VIX price on your broker today. Above 25 = potential buy signal for long-term investors."},
+  {lat:51.5,lng:-0.1,type:"merger",region:"London",title:"$12B ASSET MGMT DEAL",plain:"Major asset management acquisition would create $14T AUM giant. EU and UK competition review expected.",beginner:["M&A deals often push target stock up 20-40%."],trader:["Long acquirer on dips."],biz:["M&A support: boutique firms need deck builders and data room organisers."],now:"Search Blackrock stock price today."},
+  {lat:35.7,lng:139.7,type:"market",region:"Tokyo",title:"BOJ RATE DECISION",plain:"Bank of Japan signals further rate normalisation. Yen strengthening from multi-decade lows.",beginner:["BOJ rate changes move global currency markets significantly."],trader:["Watch USD/JPY closely. Rate hikes = yen strength."],biz:["Japan is aggressively courting foreign manufacturers."],now:"Check USD/JPY rate today."},
+  {lat:55.8,lng:37.6,type:"breaking",region:"Moscow",title:"PIPELINE CAPACITY CUT",plain:"Gazprom cutting TurkStream flows. European TTF gas futures spiking. Winter storage under pressure.",beginner:["Russian gas cuts = European energy prices rise."],trader:["Long TTF gas futures."],biz:["Energy brokering: businesses need contract advice when prices spike."],now:"Check TTF gas futures price on barchart.com."},
+  {lat:25.2,lng:55.3,type:"market",region:"Dubai",title:"GULF SOVEREIGN DEPLOY",plain:"ADIA and Mubadala committing billions to data centres, semiconductor fabs, and AI chip infrastructure.",beginner:["Gulf sovereign wealth funds are the biggest investors in the world."],trader:["Long NVDA, AMD, data centre REITs."],biz:["Dubai has zero income tax and world-class infrastructure."],now:"Search Dubai tech jobs 2026 on LinkedIn."},
+  {lat:28.6,lng:77.2,type:"trade",region:"New Delhi",title:"INDIA MFG SURGE",plain:"Foxconn, Tata Electronics, and Pegatron all expanding Indian facilities. iPhone India production at record highs.",beginner:["India is the new China for manufacturing."],trader:["Long India ETFs (INDA, NFTY)."],biz:["India manufacturing consulting is enormously lucrative right now."],now:"Search India manufacturing FDI 2026."},
+  {lat:29.9,lng:32.5,type:"breaking",region:"Suez Canal",title:"SUEZ THROUGHPUT -42%",plain:"Egypt losing hundreds of millions monthly in transit fees. Houthi attacks forcing mass rerouting via Cape.",beginner:["Suez shutdown = everything from Asia costs more and arrives later."],trader:["Long Cape-route dry bulk shipping (GOGL, SBLK)."],biz:["Freight forwarding and logistics advisory is in extreme demand."],now:"Check Brent crude oil price today."},
+  {lat:50.5,lng:30.5,type:"war",region:"Ukraine — Kyiv",title:"FRONTLINE DRONE WAR",plain:"Both sides launching hundreds of drones weekly. Western artillery deliveries accelerating.",beginner:["Drone warfare is changing military strategy permanently worldwide."],trader:["Long Rheinmetall, BAE, Saab, Leonardo."],biz:["Defence consulting and procurement advisory at premium rates."],now:"Search Rheinmetall stock today."},
+  {lat:31.5,lng:34.5,type:"war",region:"Gaza",title:"CEASEFIRE NEGOTIATIONS",plain:"Ceasefire negotiations ongoing with Qatar and Egypt mediating. Regional escalation risk remains elevated.",beginner:["Middle East conflicts always spike oil prices."],trader:["Long gold on risk premium."],biz:["Security consulting for regional businesses in extreme demand."],now:"Check gold price today."},
+  {lat:12.0,lng:51.5,type:"military",region:"Gulf of Aden",title:"HOUTHI RED SEA ATTACKS",plain:"Coalition intercepting majority of Houthi attacks but enough getting through to deter commercial shipping.",beginner:["Houthi drones cost $2,000. US interceptors cost $2M."],trader:["Long Cape route dry bulk and container shipping."],biz:["Maritime risk advisory and freight consulting in extreme demand."],now:"Search Red Sea shipping 2026 news."},
+  {lat:25.0,lng:121.5,type:"military",region:"Taiwan Strait",title:"PLA NAVAL EXERCISES",plain:"Regular PLA exercises in Taiwan Strait. TSMC makes majority of world advanced chips.",beginner:["Taiwan tension = semiconductor supply risk = tech stocks volatile."],trader:["Long defence ETFs (ITA, XAR)."],biz:["Geopolitical risk consulting for supply chain teams is premium work."],now:"Search TSMC stock price today."},
+  {lat:60.0,lng:25.0,type:"military",region:"Baltic — Finland",title:"NATO EASTERN FLANK",plain:"Tens of thousands of additional NATO troops on eastern flank. Nearly all members meeting 2% GDP target.",beginner:["NATO defence spending is a floor not a ceiling now."],trader:["Long Rheinmetall, KNDS, Saab, Leonardo, Chemring."],biz:["NATO contractor opportunities are enormous for Western firms."],now:"Search Rheinmetall stock today."},
+  {lat:47.5,lng:34.5,type:"energy",region:"Zaporizhzhia",title:"NUCLEAR PLANT UNDER THREAT",plain:"Europe largest nuclear plant operating under occupation. IAEA confirming regular safety incidents.",beginner:["Any accident = European energy crisis."],trader:["Long URA ETF."],biz:["Nuclear decommissioning and safety consulting are high-fee specialisms."],now:"Search uranium spot price today."},
+  {lat:21.5,lng:39.2,type:"energy",region:"Saudi Aramco",title:"ARAMCO CAPACITY EXPANSION",plain:"Aramco committing massive capex to expand production. Simultaneously investing in chemical diversification.",beginner:["Aramco is the most profitable company in human history."],trader:["Long Aramco for dividend yield and buyback."],biz:["Saudi Vision 2030 is the world largest economic transformation project."],now:"Check Brent crude today. Research Aramco investor relations."},
+];
+
+const PORTS=[
+  {lat:51.9,lng:4.5,name:"Rotterdam",rank:"#1 Europe",vol:"14.5M TEU/yr",status:"NORMAL",who:"Netherlands — Europe busiest port.",cargo:"Oil products, containers, chemicals, LNG",intel:"Handles 40% of all EU containerised goods. LNG terminal at 100% capacity since Russia cut pipeline gas."},
+  {lat:51.3,lng:4.3,name:"Antwerp",rank:"#2 Europe",vol:"12.0M TEU/yr",status:"NORMAL",who:"Belgium — second largest European port.",cargo:"Containers, chemicals, vehicles, LNG",intel:"World largest chemical cluster surrounds the port. US LNG imports surging."},
+  {lat:53.5,lng:9.9,name:"Hamburg",rank:"#3 Europe",vol:"8.7M TEU/yr",status:"NORMAL",who:"Germany — Northern Europe rail hub.",cargo:"Containers, vehicles, machinery, bulk",intel:"80% of cargo moves by rail into hinterland. China accounts for 30% of container volume."},
+  {lat:37.9,lng:23.7,name:"Piraeus",rank:"Med Gateway",vol:"5.6M TEU/yr",status:"ELEVATED",who:"Greece — COSCO (China) majority owned since 2016.",cargo:"Containers, ro-ro vehicles, cruise",intel:"COSCO acquired 67% in 2016 — this is the BRI European beachhead."},
+  {lat:25.8,lng:55.9,name:"Jebel Ali",rank:"#1 Middle East",vol:"14.9M TEU/yr",status:"NORMAL",who:"UAE (DP World) — largest port between Europe and East Asia.",cargo:"Containers, vehicles, re-exports to 100+ countries",intel:"Handles 70% of UAE trade. Critical re-export hub for region."},
+  {lat:29.9,lng:32.5,name:"Port Said",rank:"Suez Gateway",vol:"6.5M TEU/yr",status:"DISRUPTED",who:"Egypt — northern entrance to Suez Canal.",cargo:"Transit containers, Suez Canal traffic",intel:"SEVERELY IMPACTED by Houthi attacks. Volume down 42%. Egypt losing $700M/month."},
+  {lat:31.2,lng:121.7,name:"Shanghai",rank:"#1 World",vol:"47.3M TEU/yr",status:"NORMAL",who:"China — worlds busiest port.",cargo:"Electronics, machinery, textiles, consumer goods",intel:"New automated Yangshan Phase 4 handling 4M TEU/year with zero human operators."},
+  {lat:1.3,lng:103.8,name:"Singapore",rank:"#2 World",vol:"37.5M TEU/yr",status:"GROWING",who:"Singapore (PSA Corp) — worlds busiest transshipment hub.",cargo:"Transshipment containers, petroleum, LNG, electronics",intel:"40% of world container traffic passes through nearby Malacca Strait."},
+  {lat:33.7,lng:-118.3,name:"LA / Long Beach",rank:"#1 US West",vol:"9.9M TEU/yr",status:"NORMAL",who:"USA — handles 40% of all US containerised imports.",cargo:"Consumer goods, electronics, furniture from Asia",intel:"Near-shutdown during COVID cost US economy $1B/day."},
+  {lat:-33.9,lng:18.4,name:"Cape Town",rank:"Cape Route Hub",vol:"1.1M TEU/yr",status:"ELEVATED",who:"South Africa — bunkering hub for Cape of Good Hope rerouting.",cargo:"Bunkering, ship repairs, containers, fruit exports",intel:"Suez disruption drove Cape rerouting surge — Cape Town bunkering up 300%."},
+];
+
+const TRADE_ROUTES=[
+  {name:"Asia-Europe (Suez Route)",vol:"$380B/mo",status:"DISRUPTED",color:R},
+  {name:"Trans-Pacific (US-Asia)",vol:"$210B/mo",status:"STABLE",color:GR},
+  {name:"Asia-Europe (Cape Diversion)",vol:"$145B/mo",status:"ELEVATED",color:O},
+  {name:"Intra-Asia",vol:"$290B/mo",status:"STABLE",color:GR},
+  {name:"Trans-Atlantic",vol:"$160B/mo",status:"STABLE",color:GR},
+  {name:"Persian Gulf to Asia",vol:"$195B/mo",status:"WATCH",color:G},
+  {name:"Baltic Corridor",vol:"$42B/mo",status:"RESTRICTED",color:R},
+  {name:"Panama Canal",vol:"$270B/mo",status:"CONSTRAINED",color:O},
+  {name:"Americas North-South",vol:"$85B/mo",status:"STABLE",color:GR},
+  {name:"Australia-Asia Bulk",vol:"$120B/mo",status:"STABLE",color:GR},
+  {name:"West Africa Crude",vol:"$95B/mo",status:"WATCH",color:O},
+  {name:"Indian Ocean (Gulf-Europe)",vol:"$180B/mo",status:"ELEVATED",color:O},
+];
+
+const MSTATS=[
+  {label:"FEAR/GREED",value:"34",sub:"FEAR",color:O},
+  {label:"DXY",value:"104.2",sub:"Strong USD",color:R},
+  {label:"GOLD",value:"$3,042",sub:"Near ATH",color:G},
+  {label:"VIX",value:"19.4",sub:"Elevated",color:O},
+  {label:"OIL RISK",value:"HIGH",sub:"Red Sea",color:R},
+  {label:"COPPER",value:"$5.18",sub:"Breakout",color:G},
+];
+
+const CITIES=[
+  {name:"New York",lat:40.71,lng:-74.01},{name:"London",lat:51.51,lng:-0.13},
+  {name:"Tokyo",lat:35.69,lng:139.69},{name:"Paris",lat:48.86,lng:2.35},
+  {name:"Berlin",lat:52.52,lng:13.40},{name:"Moscow",lat:55.76,lng:37.62},
+  {name:"Beijing",lat:39.91,lng:116.39},{name:"Shanghai",lat:31.23,lng:121.47},
+  {name:"Hong Kong",lat:22.32,lng:114.17},{name:"Singapore",lat:1.35,lng:103.82},
+  {name:"Sydney",lat:-33.87,lng:151.21},{name:"Dubai",lat:25.20,lng:55.27},
+  {name:"Mumbai",lat:19.08,lng:72.88},{name:"Sao Paulo",lat:-23.55,lng:-46.63},
+  {name:"Toronto",lat:43.65,lng:-79.38},{name:"Zurich",lat:47.38,lng:8.54},
+  {name:"Frankfurt",lat:50.11,lng:8.68},{name:"Seoul",lat:37.57,lng:126.98},
+  {name:"Taipei",lat:25.04,lng:121.56},{name:"Istanbul",lat:41.01,lng:28.95},
+  {name:"Riyadh",lat:24.69,lng:46.72},{name:"Cairo",lat:30.04,lng:31.24},
+  {name:"Kyiv",lat:50.45,lng:30.52},{name:"Warsaw",lat:52.23,lng:21.01},
+];
+
+const COUNTRY_NAMES={
+  4:"Afghanistan",8:"Albania",12:"Algeria",24:"Angola",32:"Argentina",36:"Australia",
+  40:"Austria",31:"Azerbaijan",50:"Bangladesh",56:"Belgium",76:"Brazil",100:"Bulgaria",
+  104:"Myanmar",116:"Cambodia",120:"Cameroon",124:"Canada",144:"Sri Lanka",152:"Chile",
+  156:"China",170:"Colombia",178:"Rep. Congo",180:"DR Congo",191:"Croatia",192:"Cuba",
+  203:"Czech Rep.",208:"Denmark",231:"Ethiopia",246:"Finland",250:"France",276:"Germany",
+  288:"Ghana",300:"Greece",320:"Guatemala",324:"Guinea",340:"Honduras",348:"Hungary",
+  356:"India",360:"Indonesia",364:"Iran",368:"Iraq",372:"Ireland",376:"Israel",
+  380:"Italy",392:"Japan",398:"Kazakhstan",400:"Jordan",404:"Kenya",408:"N. Korea",
+  410:"S. Korea",414:"Kuwait",418:"Laos",422:"Lebanon",428:"Latvia",434:"Libya",
+  440:"Lithuania",458:"Malaysia",466:"Mali",484:"Mexico",496:"Mongolia",504:"Morocco",
+  508:"Mozambique",516:"Namibia",524:"Nepal",528:"Netherlands",554:"New Zealand",
+  562:"Niger",566:"Nigeria",578:"Norway",512:"Oman",586:"Pakistan",604:"Peru",
+  608:"Philippines",616:"Poland",620:"Portugal",634:"Qatar",642:"Romania",643:"Russia",
+  682:"Saudi Arabia",686:"Senegal",688:"Serbia",703:"Slovakia",706:"Somalia",
+  710:"South Africa",724:"Spain",729:"Sudan",752:"Sweden",756:"Switzerland",
+  760:"Syria",764:"Thailand",784:"UAE",788:"Tunisia",792:"Turkey",800:"Uganda",
+  804:"Ukraine",818:"Egypt",826:"United Kingdom",834:"Tanzania",840:"United States",
+  858:"Uruguay",862:"Venezuela",887:"Yemen",704:"Vietnam",
+};
+
+const CENTROID_OVERRIDES={
+  250:[2.3,46.5],826:[-2.5,54.0],752:[15.0,62.0],578:[10.0,62.5],246:[26.0,64.0],
+  208:[10.0,56.0],620:[-8.0,39.5],724:[-3.5,40.0],528:[5.3,52.3],56:[4.5,50.5],
+  276:[10.4,51.2],380:[12.5,42.5],300:[22.0,39.5],840:[-98.0,38.5],124:[-96.0,60.0],
+  36:[134.0,-25.0],554:[172.0,-42.0],356:[80.0,22.0],156:[104.0,35.0],
+  643:[60.0,60.0],76:[-52.0,-14.0],32:[-63.0,-34.0],710:[25.0,-29.0],
+  818:[30.0,26.5],12:[3.0,28.0],434:[17.0,27.0],504:[-5.5,32.0],566:[8.5,9.0],
+  404:[37.5,0.5],231:[40.0,9.0],180:[24.0,-4.0],729:[30.0,15.5],360:[118.0,-2.5],
+  586:[68.0,30.0],764:[101.0,15.5],704:[106.0,16.0],116:[105.0,12.5],
+  104:[96.0,20.0],458:[109.0,4.0],410:[128.0,36.5],392:[138.0,37.0],
+  792:[35.0,39.0],364:[53.0,32.5],682:[45.0,24.0],
+};
+
+const STATIC_PRICES=[
+  {sym:"BTC",name:"Bitcoin",price:87500,prev:85000,cat:"crypto"},
+  {sym:"ETH",name:"Ethereum",price:2050,prev:1980,cat:"crypto"},
+  {sym:"SOL",name:"Solana",price:130,prev:125,cat:"crypto"},
+  {sym:"XRP",name:"XRP",price:0.58,prev:0.55,cat:"crypto"},
+  {sym:"GOLD",name:"Gold",price:3042,prev:3010,cat:"metal"},
+  {sym:"SILV",name:"Silver",price:34.2,prev:33.8,cat:"metal"},
+  {sym:"COPP",name:"Copper",price:5.18,prev:5.05,cat:"metal"},
+  {sym:"PLAT",name:"Platinum",price:985,prev:975,cat:"metal"},
+  {sym:"BRENT",name:"Brent Crude",price:87.4,prev:86.8,cat:"commodity"},
+  {sym:"WTI",name:"WTI Crude",price:83.2,prev:82.5,cat:"commodity"},
+  {sym:"NGAS",name:"Natural Gas",price:4.12,prev:3.85,cat:"commodity"},
+  {sym:"WHET",name:"Wheat",price:540,prev:535,cat:"commodity"},
+  {sym:"LMT",name:"Lockheed Martin",price:468,prev:462,cat:"defence"},
+  {sym:"RTX",name:"RTX Corp",price:98.2,prev:97.1,cat:"defence"},
+  {sym:"RHM",name:"Rheinmetall",price:890,prev:860,cat:"defence"},
+  {sym:"BA",name:"Boeing",price:182,prev:179,cat:"defence"},
+];
+
+async function callClaude(systemPrompt, userPrompt) {
+  const res = await fetch("https://api.anthropic.com/v1/messages", {
+    method:"POST",
+    headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({
+      model:"claude-sonnet-4-20250514",
+      max_tokens:1000,
+      system:systemPrompt,
+      messages:[{role:"user",content:userPrompt}],
+      tools:[{type:"web_search_20250305",name:"web_search"}]
+    })
+  });
+  const data = await res.json();
+  return (data.content||[]).filter(b=>b.type==="text").map(b=>b.text).join("\n");
+}
+
+async function fetchLiveIntel(topic="all") {
+  const topicMap={
+    all:"breaking geopolitical news, gold, bitcoin, oil, energy, wars, defence, macro markets",
+    crypto:"Bitcoin BTC ETF, Ethereum, Solana, crypto markets",
+    metals:"gold price, silver, copper, platinum, uranium",
+    oil:"Brent crude, WTI, OPEC, Saudi Arabia, natural gas, LNG, Red Sea",
+    war:"Ukraine Russia war, Gaza Middle East, Sudan, DRC conflict",
+    defence:"Rheinmetall, Lockheed, Raytheon, BAE, Saab, NATO defence stocks",
+    macro:"Federal Reserve, inflation, dollar DXY, tariffs, trade war",
+  };
+  const focus=topicMap[topic]||topicMap.all;
+  const today=new Date().toLocaleDateString("en-GB",{day:"2-digit",month:"short",year:"numeric"});
+  const system=`You are a financial intelligence analyst for Summit Capital. Today is ${today}.
+Use web_search to find the LATEST news before responding.
+Respond ONLY with a JSON array. No preamble, no markdown, no backticks.
+Each object: headline (max 120 chars with real numbers), cat (breaking|market|crypto|metals|oil|war|defence|geo|energy|macro), sentiment (bullish|bearish|critical|neutral), source (e.g. Reuters), search (3-5 word Google search), time (e.g. 2h ago).`;
+  const user=`Search for the LATEST breaking news right now on: ${focus}. Return exactly 8 items as a JSON array.`;
+  try {
+    const raw=await callClaude(system,user);
+    const clean=raw.replace(/```json|```/g,"").trim();
+    const s=clean.indexOf("["),e=clean.lastIndexOf("]");
+    if(s===-1||e===-1) throw new Error("No array");
+    return JSON.parse(clean.slice(s,e+1)).slice(0,8);
+  } catch(err) { console.error(err); return null; }
+}
+
+async function fetchLivePrices() {
+  const today=new Date().toLocaleDateString("en-GB",{day:"2-digit",month:"short",year:"numeric"});
+  const system=`You are a market data terminal. Today is ${today}. Use web_search to find CURRENT prices.
+Respond ONLY with a JSON array. No preamble, no markdown, no backticks.
+Each object: { sym, name, price (number), prev (number), cat } where cat is crypto|metal|commodity|defence.`;
+  const user=`Search current prices for: Bitcoin, Ethereum, Solana, XRP, Gold, Silver, Copper, Platinum, Brent Crude, WTI Crude, Natural Gas, Wheat, Lockheed Martin, RTX Corp, Rheinmetall, Boeing. Return as JSON array.`;
+  try {
+    const raw=await callClaude(system,user);
+    const clean=raw.replace(/```json|```/g,"").trim();
+    const s=clean.indexOf("["),e=clean.lastIndexOf("]");
+    if(s===-1||e===-1) throw new Error("No array");
+    return JSON.parse(clean.slice(s,e+1));
+  } catch(err) { console.error(err); return null; }
+}
+
+function WorldMap({layer,onCountryClick,showRoutes,showBRI}) {
+  const svgRef=useRef(null);
+  const gRef=useRef(null);
+  const [world,setWorld]=useState(null);
+  const [zoomK,setZoomK]=useState(1);
+  const zoomRef=useRef(null);
+
+  useEffect(()=>{
+    if(!window.d3||!window.topojson) return;
+    fetch("https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json")
+      .then(r=>r.json()).then(setWorld).catch(()=>{});
+  },[]);
+
+  useEffect(()=>{
+    if(!svgRef.current||!window.d3) return;
+    const d3=window.d3;
+    const svg=d3.select(svgRef.current);
+    const zoom=d3.zoom().scaleExtent([0.5,150]).on("zoom",(event)=>{
+      if(gRef.current){ d3.select(gRef.current).attr("transform",event.transform); setZoomK(event.transform.k); }
     });
+    svg.call(zoom).on("dblclick.zoom",null);
+    zoomRef.current=zoom;
+    svg.on("click",(e)=>{ if(e.target===svgRef.current) onCountryClick(null); });
+  },[]);
 
-    const infowindow = new google.maps.InfoWindow({
-      content: `
-        <div class="pop-wrap">
-          <div class="pop-region">${ev.region}</div>
-          <div class="pop-title">${ev.title}</div>
-          <div class="pop-body">${ev.body}</div>
+  const zoomIn=()=>{ if(zoomRef.current&&svgRef.current) window.d3.select(svgRef.current).transition().duration(300).call(zoomRef.current.scaleBy,1.6); };
+  const zoomOut=()=>{ if(zoomRef.current&&svgRef.current) window.d3.select(svgRef.current).transition().duration(300).call(zoomRef.current.scaleBy,0.625); };
+  const reset=()=>{ if(zoomRef.current&&svgRef.current) window.d3.select(svgRef.current).transition().duration(500).call(zoomRef.current.transform,window.d3.zoomIdentity); };
+
+  if(!window.d3||!window.topojson) return (
+    <div style={{width:"100%",height:"100%",display:"flex",alignItems:"center",justifyContent:"center",background:"#040a10"}}>
+      <div style={{fontFamily:"Orbitron,monospace",fontSize:10,color:G,letterSpacing:3}}>LOADING GLOBE...</div>
+    </div>
+  );
+
+  const d3=window.d3,topojson=window.topojson;
+  const W2=svgRef.current?svgRef.current.clientWidth||900:900;
+  const H2=svgRef.current?svgRef.current.clientHeight||500:500;
+  const proj=d3.geoNaturalEarth1().scale(W2/6.2).translate([W2/2,H2/2]);
+  const pathGen=d3.geoPath().projection(proj);
+  let countries=null,borders=null;
+  if(world&&topojson){
+    try{ countries=topojson.feature(world,world.objects.countries); borders=topojson.mesh(world,world.objects.countries,(a,b)=>a!==b); }catch(e){}
+  }
+
+  function countryFill(id){
+    const n=+id;
+    if([840,124].includes(n)) return "#2a6b8a";
+    if(n===484) return "#2a7a6a";
+    if([36,554].includes(n)) return "#2a5a7a";
+    if([276,250,724,380,620,528,56,756,40,203,616,348,642,804,100,300,191,703,705,8,440,428,372,208,578,246,752].includes(n)) return "#1e4060";
+    if(n===643) return "#1e3d6a";
+    if([682,368,364,400,760,887,512,414,634,784,422,376].includes(n)) return "#6a5a2a";
+    if([156,392,410,408].includes(n)) return "#2a5a3a";
+    if([356,360,458,704,764,116,418,104,50,524,586,144,608].includes(n)) return "#2a5535";
+    if([818,434,788,12,504].includes(n)) return "#7a6a3a";
+    if([566,288,686,324].includes(n)) return "#3a5a1a";
+    if([710,516,716,894,508].includes(n)) return "#4a5a1a";
+    if([180,24,120,266,178].includes(n)) return "#2a5a1a";
+    return "#3a5a1a";
+  }
+
+  const briRoutes=[
+    {coords:[[121.5,31.2],[103.8,1.3],[80.2,13.1],[55.9,25.8],[43.2,11.6],[18.4,-33.9],[4.5,51.9]],w:1.8,speed:10,label:"MARITIME SILK ROAD",from:"China (Shanghai)",to:"Europe (Rotterdam)",cargo:"Electronics, machinery, consumer goods",notes:"China primary maritime export corridor. Passes through Malacca Strait, Indian Ocean, Red Sea (currently disrupted), Suez Canal."},
+    {coords:[[121.5,31.2],[116.4,39.9],[87.6,43.8],[69.2,41.3],[37.6,55.8],[4.5,51.9]],w:1.5,speed:8,label:"EURASIA RAIL",from:"China (Chongqing)",to:"Europe (Hamburg)",cargo:"Electronics, automotive parts",notes:"Rail freight 3x faster than sea. 15,000km across Kazakhstan, Russia, Poland."},
+    {coords:[[103.8,30.7],[76.8,34.1],[67.0,25.4],[58.6,23.6]],w:1.4,speed:9,label:"CPEC",from:"China (Kashgar)",to:"Pakistan (Gwadar)",cargo:"Energy equipment, machinery",notes:"$62B investment. Gives China Indian Ocean access bypassing Malacca."},
+  ];
+
+  const tradeRoutes=[
+    {coords:[[-74,40.7],[4.5,51.9]],color:"#00e5ff",w:1.4,type:"container",label:"TRANS-ATLANTIC",from:"USA (New York)",to:"Europe (Rotterdam)",cargo:"Manufactured goods",notes:"Busiest high-value route. Dominated by Maersk, MSC, Hapag-Lloyd."},
+    {coords:[[103.8,1.3],[43.5,12],[32.5,29.9],[4.5,51.9]],color:"#ff3344",w:0.8,type:"restricted",label:"SUEZ (DISRUPTED)",from:"Asia",to:"Europe",cargo:"Containers — DISRUPTED",notes:"HOUTHI ATTACKS: 42% throughput reduction. Each ship adds ~$1M cost and 14 days."},
+    {coords:[[103.8,1.3],[18.4,-33.9],[-10,0],[4.5,51.9]],color:"#00ff88",w:1.8,type:"container",label:"CAPE DIVERSION",from:"Asia (Singapore)",to:"Europe via Cape",cargo:"All containerised cargo",notes:"400% volume surge since Suez disruption. Cape Town bunkering at capacity."},
+    {coords:[[55.9,25.8],[103.8,1.3],[114.2,22.3]],color:"#ff8800",w:2.3,type:"oil",label:"GULF-ASIA OIL",from:"Saudi Arabia, Iraq, Kuwait, UAE",to:"China, Japan, Korea, India",cargo:"Crude oil — 20M bbl/day",notes:"World most critical energy corridor. Any Iran escalation threatens this route."},
+    {coords:[[-74,40.7],[-79.5,9],[-118.3,33.7]],color:"#c9a84c",w:1.2,type:"container",label:"PANAMA CANAL",from:"US East Coast",to:"US West Coast + Asia",cargo:"Consumer goods",notes:"CONSTRAINED: Drought reduced capacity 30%."},
+    {coords:[[103.8,1.3],[139.7,35.7],[-118.3,33.7]],color:"#00e5ff",w:2.5,type:"container",label:"TRANS-PACIFIC",from:"China, Japan, Korea, SE Asia",to:"USA (Los Angeles)",cargo:"Electronics, consumer goods",notes:"World highest volume containerised trade lane. China alone accounts for 40%."},
+    {coords:[[55.9,25.8],[4.5,51.9]],color:"#ff8800",w:1.3,type:"oil",label:"GULF-EUROPE LNG",from:"Qatar, UAE, Saudi Arabia",to:"Europe (Rotterdam)",cargo:"LNG, crude oil",notes:"Qatar LNG replacing Russian pipeline gas."},
+    {coords:[[18.1,59.3],[37.6,55.8]],color:"#ff3344",w:0.7,type:"restricted",label:"BALTIC (RESTRICTED)",from:"Baltic states",to:"Russia",cargo:"SEVERELY RESTRICTED",notes:"NATO sanctions have closed Baltic commercial routes."},
+  ];
+
+  const visibleEvents=layer==="all"?EVENTS:EVENTS.filter(e=>e.type===layer);
+
+  return (
+    <div style={{width:"100%",height:"100%",position:"relative",background:"#040a10",overflow:"hidden"}}>
+      <svg ref={svgRef} style={{width:"100%",height:"100%",display:"block",cursor:"grab"}}>
+        <g ref={gRef}>
+          <rect x="-10000" y="-10000" width="30000" height="30000" fill="#0a1628"/>
+          {countries&&countries.features.map(f=>(
+            <path key={f.id} d={pathGen?pathGen(f)||"":""} fill={countryFill(f.id)} stroke="#1a2a3a" strokeWidth={0.4/Math.max(zoomK,1)}
+              style={{cursor:"pointer"}} onClick={e=>{e.stopPropagation();const n=COUNTRY_NAMES[+f.id];if(n) onCountryClick({type:"country",name:n,x:e.clientX,y:e.clientY});}}/>
+          ))}
+          {borders&&<path d={pathGen?pathGen(borders)||"":""} fill="none" stroke="#1e3050" strokeWidth={0.3/Math.max(zoomK,1)}/>}
+          {countries&&proj&&zoomK>=1.2&&countries.features.map(f=>{
+            const name=COUNTRY_NAMES[+f.id]; if(!name) return null;
+            try{
+              const ov=CENTROID_OVERRIDES[+f.id];
+              let cx,cy;
+              if(ov){const pt=proj(ov);if(!pt||isNaN(pt[0]))return null;[cx,cy]=pt;}
+              else{const c=d3.geoCentroid(f);if(!c)return null;const pt=proj(c);if(!pt||isNaN(pt[0]))return null;[cx,cy]=pt;}
+              const fs=Math.max(4.5,Math.min(8,6/zoomK*2));
+              return(
+                <g key={"l"+f.id} transform={"translate("+cx+","+cy+")"} style={{pointerEvents:"none"}}>
+                  <g transform={"scale("+(1/zoomK)+")"}>
+                    <text textAnchor="middle" dominantBaseline="middle" fill="#9ac8e0" fontSize={fs}
+                      fontFamily="Share Tech Mono,monospace" opacity={Math.min(1,(zoomK-0.8)*1.8)}
+                      stroke="rgba(2,8,16,0.92)" strokeWidth="2.5" paintOrder="stroke">
+                      {name.toUpperCase()}
+                    </text>
+                  </g>
+                </g>
+              );
+            }catch(e){return null;}
+          })}
+          {proj&&zoomK>=3&&CITIES.map((city,i)=>{
+            const pt=proj([city.lng,city.lat]);
+            if(!pt||isNaN(pt[0])||isNaN(pt[1])) return null;
+            return(
+              <g key={"c"+i} transform={"translate("+pt[0]+","+pt[1]+")"} style={{pointerEvents:"none"}}>
+                <g transform={"scale("+(1/zoomK)+")"}>
+                  <circle r="2" fill="#3a7aa0" opacity="0.8"/>
+                  <text x="4" y="-2" fill="#5a9ab8" fontSize="5" fontFamily="Share Tech Mono,monospace" opacity="0.8" stroke="rgba(2,8,16,0.9)" strokeWidth="2" paintOrder="stroke">{city.name}</text>
+                </g>
+              </g>
+            );
+          })}
+          {showRoutes&&proj&&tradeRoutes.map((r,i)=>{
+            const line={type:"LineString",coordinates:r.coords};
+            const d=pathGen?pathGen(line):null; if(!d) return null;
+            const seg=r.type==="restricted"?6:r.type==="oil"?18:20,gap=r.type==="restricted"?4:8,tot=seg+gap;
+            const mp=r.coords[Math.floor(r.coords.length/2)];
+            const mpProj=mp?proj(mp):null;
+            return(
+              <g key={"tr"+i} style={{cursor:"pointer"}} onClick={e=>{e.stopPropagation();onCountryClick({type:"route",route:r,isBRI:false,x:e.clientX,y:e.clientY});}}>
+                <path d={d} fill="none" stroke={r.color} strokeWidth={r.w+1.5} opacity="0.12"/>
+                <path d={d} fill="none" stroke={r.color} strokeWidth={r.w} opacity="0.55"/>
+                <path d={d} fill="none" stroke={r.color} strokeWidth={r.w*0.7} opacity="0.9" strokeDasharray={seg+" "+gap} strokeLinecap="round">
+                  <animate attributeName="stroke-dashoffset" from="0" to={"-"+tot} dur="30s" repeatCount="indefinite"/>
+                </path>
+                <path d={d} fill="none" stroke="transparent" strokeWidth="14"/>
+                {mpProj&&<g transform={"translate("+mpProj[0]+","+mpProj[1]+")"}>
+                  <g transform={"scale("+(1/zoomK)+")"}>
+                    <rect x="-2" y="-9" width={r.label.length*4.3+4} height="12" fill="rgba(2,8,16,0.85)" rx="1"/>
+                    <text fill={r.color} fontSize="6.5" fontFamily="Share Tech Mono,monospace">{r.label}</text>
+                  </g>
+                </g>}
+              </g>
+            );
+          })}
+          {showBRI&&proj&&briRoutes.map((r,i)=>{
+            const line={type:"LineString",coordinates:r.coords};
+            const d=pathGen?pathGen(line):null; if(!d) return null;
+            const mp=r.coords[Math.floor(r.coords.length/2)];
+            const mpProj=proj?proj(mp):null;
+            const seg=16,gap=7,tot=seg+gap;
+            return(
+              <g key={"bri"+i} style={{cursor:"pointer"}} onClick={e=>{e.stopPropagation();onCountryClick({type:"route",route:r,isBRI:true,x:e.clientX,y:e.clientY});}}>
+                <path d={d} fill="none" stroke="#ff9900" strokeWidth={r.w+2} opacity="0.1"/>
+                <path d={d} fill="none" stroke="#ff9900" strokeWidth={r.w} opacity="0.5"/>
+                <path d={d} fill="none" stroke="#ff9900" strokeWidth={r.w*0.65} opacity="0.95" strokeDasharray={seg+" "+gap} strokeLinecap="round">
+                  <animate attributeName="stroke-dashoffset" from="0" to={"-"+tot} dur="11s" repeatCount="indefinite"/>
+                </path>
+                <path d={d} fill="none" stroke="transparent" strokeWidth="12"/>
+                {mpProj&&<g transform={"translate("+mpProj[0]+","+mpProj[1]+")"}>
+                  <g transform={"scale("+(1/zoomK)+")"}>
+                    <rect x="-2" y="-9" width={r.label.length*4.2+4} height="12" fill="rgba(2,8,16,0.85)" rx="1"/>
+                    <text fill="#ff9900" fontSize="6.5" fontFamily="Share Tech Mono,monospace">{r.label}</text>
+                  </g>
+                </g>}
+              </g>
+            );
+          })}
+          {proj&&PORTS.map((p,i)=>{
+            const pt=proj([p.lng,p.lat]); if(!pt) return null;
+            const sz=8;
+            return(
+              <g key={"p"+i} transform={"translate("+pt[0]+","+pt[1]+")"} style={{cursor:"pointer"}}
+                onClick={e=>{e.stopPropagation();onCountryClick({type:"port",port:p,x:e.clientX,y:e.clientY});}}>
+                <g transform={"scale("+(1/zoomK)+")"}>
+                  <circle r={sz+5} fill={C} opacity="0.12"/>
+                  <rect x={-sz/2} y={-sz/2} width={sz} height={sz} fill={C} opacity="0.85" stroke="rgba(0,0,0,0.5)" strokeWidth="0.8" transform="rotate(45)"/>
+                  <text x={sz+2} y="-2" fill={C} fontSize="7.5" fontFamily="Share Tech Mono,monospace" opacity="0.9">{p.name}</text>
+                  <text x={sz+2} y="7" fill={C} fontSize="6" fontFamily="Share Tech Mono,monospace" opacity="0.7">{p.status}</text>
+                </g>
+              </g>
+            );
+          })}
+          {proj&&visibleEvents.map((ev,i)=>{
+            const pt=proj([ev.lng,ev.lat]);
+            if(!pt||isNaN(pt[0])||isNaN(pt[1])) return null;
+            const col=TC[ev.type]||"#fff";
+            return(
+              <g key={"ev"+i} transform={"translate("+pt[0]+","+pt[1]+")"} style={{cursor:"pointer"}}
+                onClick={e=>{e.stopPropagation();onCountryClick({type:"event",event:ev,x:e.clientX,y:e.clientY});}}>
+                <g transform={"scale("+(1/zoomK)+")"}>
+                  <circle r="10" fill={col} opacity="0.08">
+                    <animate attributeName="r" values="6;14;6" dur="2.5s" repeatCount="indefinite"/>
+                    <animate attributeName="opacity" values="0.15;0;0.15" dur="2.5s" repeatCount="indefinite"/>
+                  </circle>
+                  <circle r="4" fill={col} opacity="0.9"/>
+                  <circle r="1.5" fill="#fff" opacity="0.9"/>
+                </g>
+              </g>
+            );
+          })}
+        </g>
+      </svg>
+      <div style={{position:"absolute",top:10,left:10,display:"flex",flexDirection:"column",gap:4,zIndex:50}}>
+        {[["+",zoomIn],["-",zoomOut],["H",reset]].map(([lbl,fn])=>(
+          <div key={lbl} onClick={fn} style={{background:"rgba(4,9,16,0.93)",border:"1px solid #1a4080",color:G,width:22,height:22,display:"flex",alignItems:"center",justifyContent:"center",cursor:"pointer",fontFamily:"Orbitron,monospace",fontSize:10,borderRadius:2}}>{lbl}</div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function SituationRoom() {
+  const TODAY_STR=new Date().toLocaleDateString("en-GB",{day:"2-digit",month:"short",year:"numeric"});
+  const [prices,setPrices]=useState(STATIC_PRICES.map(p=>({...p})));
+  const [pricesLive,setPricesLive]=useState(false);
+  const [layer,setLayer]=useState("all");
+  const [popup,setPopup]=useState(null);
+  const [tab,setTab]=useState("xfeed");
+  const [liveFeed,setLiveFeed]=useState([]);
+  const [feedLoading,setFeedLoading]=useState(false);
+  const [feedError,setFeedError]=useState(null);
+  const [feedTopic,setFeedTopic]=useState("all");
+  const [isMobile,setIsMobile]=useState(false);
+  const [showPanel,setShowPanel]=useState(false);
+  const [showRoutes,setShowRoutes]=useState(false);
+  const [showBRI,setShowBRI]=useState(false);
+  const [newsMin,setNewsMin]=useState(false);
+  const [newsIdx,setNewsIdx]=useState(0);
+  const [pricesLoading,setPricesLoading]=useState(false);
+  const [lastRefresh,setLastRefresh]=useState(null);
+
+  const FEED_TOPICS=[
+    {key:"all",label:"ALL"},{key:"crypto",label:"CRYPTO"},{key:"metals",label:"METALS"},
+    {key:"oil",label:"OIL"},{key:"war",label:"WARS"},{key:"defence",label:"DEFENCE"},{key:"macro",label:"MACRO"},
+  ];
+  const catColors={crypto:"#f7931a",market:"#c9a84c",metals:"#c9a84c",energy:"#ff6600",oil:"#ff8800",war:COL_WAR,defence:"#ff4444",geo:COL_GEO,macro:C,breaking:COL_BREAKING};
+  const sentColors={bullish:"#00ff88",bearish:"#ff3344",critical:"#ff0044",neutral:"#a8c4d4"};
+
+  const loadFeed=useCallback(async(topic)=>{
+    setFeedLoading(true);setFeedError(null);
+    const data=await fetchLiveIntel(topic);
+    if(data&&data.length>0){
+      setLiveFeed(data);
+      setLastRefresh(new Date().toLocaleTimeString("en-GB",{hour:"2-digit",minute:"2-digit"}));
+    } else {
+      setFeedError("Could not fetch live intel. Check connection.");
+    }
+    setFeedLoading(false);
+  },[]);
+
+  const loadPrices=useCallback(async()=>{
+    setPricesLoading(true);
+    const data=await fetchLivePrices();
+    if(data&&data.length>0){
+      setPrices(data.map(p=>({...p,price:typeof p.price==="number"?p.price:parseFloat(p.price)||0,prev:typeof p.prev==="number"?p.prev:parseFloat(p.prev)||0})));
+      setPricesLive(true);
+    }
+    setPricesLoading(false);
+  },[]);
+
+  useEffect(()=>{
+    const check=()=>setIsMobile(window.innerWidth<680);
+    check();window.addEventListener("resize",check);
+    loadFeed("all");
+    loadPrices();
+    return()=>window.removeEventListener("resize",check);
+  },[]);
+
+  useEffect(()=>{
+    if(pricesLive) return;
+    const t=setInterval(()=>setPrices(p=>p.map(c=>({...c,price:+(c.price*(1+(Math.random()-0.5)*0.0008)).toFixed(c.price>100?2:c.price>1?3:5)}))),2000);
+    return()=>clearInterval(t);
+  },[pricesLive]);
+
+  useEffect(()=>{
+    const t=setInterval(()=>setNewsIdx(i=>i+1),5000);
+    return()=>clearInterval(t);
+  },[]);
+
+  const layers=["all","breaking","war","military","disaster","market","trade","energy","geo","merger"];
+  const layerLabels={all:"ALL",breaking:"BREAK",war:"WAR",military:"MIL",disaster:"DIS",market:"MKT",trade:"TRADE",energy:"NRG",geo:"GEO",merger:"M&A"};
+  const tickerPool=liveFeed.length>0?liveFeed.map(s=>({type:s.cat,headline:s.headline,time:s.time||"live"})):[{type:"market",headline:"Loading live intelligence — searching global markets now...",time:"now"}];
+  const tickerItem=tickerPool[newsIdx%tickerPool.length];
+  const tickerCol=TC[tickerItem.type]||G;
+  const W2=typeof window!=="undefined"?window.innerWidth:1200;
+  const H2=typeof window!=="undefined"?window.innerHeight:700;
+
+  return (
+    <div style={{height:"100%",width:"100%",display:"flex",flexDirection:"column",background:"#040a10",color:"#c8d8e4",overflow:"hidden"}}>
+
+      <div style={{background:"#040a10",borderBottom:"1px solid #0e2040",height:26,display:"flex",alignItems:"center",overflow:"hidden",flexShrink:0}}>
+        <div style={{background:"#c9a84c",color:"#000",fontFamily:"Orbitron,monospace",fontSize:7,fontWeight:700,padding:"0 10px",height:"100%",display:"flex",alignItems:"center",flexShrink:0,letterSpacing:1}}>{pricesLive?"LIVE":"MKT"}</div>
+        <div style={{overflow:"hidden",flex:1}}>
+          <div style={{display:"flex",animation:"sr-ticker 70s linear infinite",whiteSpace:"nowrap"}}>
+            {[...prices,...prices].map((c,i)=>{
+              const chg=(c.price-c.prev)/c.prev*100,up=chg>=0;
+              const cc=c.cat==="crypto"?"#f7931a":c.cat==="metal"?G:c.cat==="commodity"?O:"#ff4444";
+              return <span key={i} style={{display:"inline-flex",alignItems:"center",gap:5,padding:"0 16px",borderRight:"1px solid #0e2040",height:26}}>
+                <span style={{color:cc,fontSize:8,fontFamily:"Orbitron,monospace"}}>{c.sym}</span>
+                <span style={{color:"#a8c4d4",fontSize:8}}>{c.cat==="crypto"?"$":""}{c.price.toLocaleString(undefined,{maximumFractionDigits:c.price>100?2:c.price>1?3:5})}</span>
+                <span style={{color:up?GR:R,fontSize:7}}>{up?"▲":"▼"}{Math.abs(chg).toFixed(2)}%</span>
+              </span>;
+            })}
+          </div>
         </div>
-      `
-    });
+      </div>
 
-    marker.addListener("click", () => {
-      infowindow.open(map, marker);
-    });
+      <div style={{display:"flex",flex:1,overflow:"hidden",position:"relative"}}>
 
-    markers.push(marker);
-  });
+        <div style={{flex:1,position:"relative",overflow:"hidden"}}>
+          <WorldMap layer={layer} onCountryClick={setPopup} showRoutes={showRoutes} showBRI={showBRI}/>
+
+          <div style={{position:"absolute",top:10,right:10,display:"flex",gap:4,zIndex:51}}>
+            {[[showRoutes,()=>setShowRoutes(r=>!r),"#00e5ff","ROUTES"],[showBRI,()=>setShowBRI(b=>!b),"#ff9900","BRI"]].map(([active,fn,col,lbl])=>(
+              <div key={lbl} onClick={fn} style={{display:"flex",alignItems:"center",gap:4,padding:"4px 8px",background:"rgba(4,9,16,0.95)",border:"1px solid "+(active?col:"#1a4080"),cursor:"pointer",fontFamily:"Orbitron,monospace",fontSize:6,color:active?col:"#3a5570",letterSpacing:1}}>
+                <div style={{width:5,height:5,borderRadius:"50%",background:active?col:"#1a4080"}}/>{lbl}
+              </div>
+            ))}
+            <div onClick={loadPrices} style={{display:"flex",alignItems:"center",gap:4,padding:"4px 8px",background:"rgba(4,9,16,0.95)",border:"1px solid "+(pricesLive?"#00ff88":"#1a4080"),cursor:"pointer",fontFamily:"Orbitron,monospace",fontSize:6,color:pricesLive?G:"#3a5570",letterSpacing:1}}>
+              <span style={{display:"inline-block",animation:pricesLoading?"sr-spin 1s linear infinite":"none"}}>⟳</span> PRICES
+            </div>
+          </div>
+
+          <div style={{position:"absolute",top:10,left:44,display:"flex",gap:3,flexWrap:"wrap",zIndex:50,maxWidth:"calc(100% - 180px)"}}>
+            {layers.map(l=>{
+              const dc={all:"#a8c4d4",breaking:COL_BREAKING,war:COL_WAR,military:COL_MILITARY,disaster:COL_DISASTER,market:COL_MARKET,trade:COL_TRADE,energy:COL_ENERGY,geo:COL_GEO,merger:COL_MERGER}[l]||"#a8c4d4";
+              return(
+                <div key={l} onClick={()=>setLayer(l)} style={{display:"flex",alignItems:"center",gap:3,padding:"3px 6px",background:"rgba(4,9,16,0.95)",border:"1px solid "+(layer===l?dc:"#0e2040"),cursor:"pointer",fontFamily:"Orbitron,monospace",fontSize:6,color:layer===l?dc:"#3a5570",letterSpacing:1}}>
+                  <div style={{width:4,height:4,borderRadius:"50%",background:dc,flexShrink:0}}/>{layerLabels[l]}
+                </div>
+              );
+            })}
+          </div>
+
+          {!isMobile&&<div style={{position:"absolute",bottom:120,left:10,background:"rgba(4,9,16,0.92)",border:"1px solid #0e2040",padding:"6px 8px",display:"flex",flexDirection:"column",gap:4,zIndex:50}}>
+            {[["breaking",COL_BREAKING,"BREAKING"],["war",COL_WAR,"WAR"],["military",COL_MILITARY,"MILITARY"],["market",COL_MARKET,"MARKET"],["energy",COL_ENERGY,"ENERGY"],["geo",COL_GEO,"GEO"]].map(([t,col,lbl])=>(
+              <div key={lbl} style={{display:"flex",alignItems:"center",gap:6,fontFamily:"Share Tech Mono,monospace",fontSize:7,color:"#5a7a8a"}}>
+                <div style={{width:7,height:7,borderRadius:"50%",background:col,boxShadow:"0 0 4px "+col}}/>{lbl}
+              </div>
+            ))}
+          </div>}
+
+          <div style={{position:"absolute",bottom:10,left:10,zIndex:60,width:newsMin?32:270}}>
+            <div style={{background:"rgba(4,9,16,0.97)",border:"1px solid #1a4080",borderBottom:"none",padding:"5px 8px",display:"flex",justifyContent:"space-between",alignItems:"center",cursor:newsMin?"pointer":"default"}} onClick={()=>newsMin&&setNewsMin(false)}>
+              {!newsMin&&<div style={{display:"flex",alignItems:"center",gap:5}}>
+                <div style={{width:5,height:5,borderRadius:"50%",background:R,animation:"sr-pulse 1s infinite"}}/>
+                <span style={{fontFamily:"Orbitron,monospace",fontSize:6,color:G,letterSpacing:2}}>BREAKING FEED</span>
+                {liveFeed.length>0&&<span style={{fontFamily:"Share Tech Mono,monospace",fontSize:6,color:"#2a6040"}}>LIVE</span>}
+              </div>}
+              {newsMin&&<div style={{width:5,height:5,borderRadius:"50%",background:R,animation:"sr-pulse 1s infinite"}}/>}
+              <div onClick={e=>{e.stopPropagation();setNewsMin(m=>!m);}} style={{fontFamily:"Orbitron,monospace",fontSize:9,color:"#3a5570",cursor:"pointer",padding:"0 4px"}}>{newsMin?"+":" − "}</div>
+            </div>
+            {!newsMin&&tickerItem&&(
+              <div style={{background:"rgba(4,9,16,0.97)",border:"1px solid #1a4080",borderTop:"none",padding:"8px 10px"}}>
+                <div style={{fontFamily:"Orbitron,monospace",fontSize:5.5,color:tickerCol,letterSpacing:2,marginBottom:4,display:"flex",justifyContent:"space-between"}}>
+                  <span>{(tickerItem.type||"market").toUpperCase()}</span>
+                  <span style={{fontFamily:"Share Tech Mono,monospace",fontSize:6,color:"#6a8a9a"}}>{tickerItem.time}</span>
+                </div>
+                <div key={newsIdx} style={{fontFamily:"Rajdhani,sans-serif",fontSize:10.5,fontWeight:600,color:"#e0eaf4",lineHeight:1.4,animation:"sr-nfade 5s ease"}}>{tickerItem.headline}</div>
+                <div style={{marginTop:5,height:1.5,background:"#0e2040",borderRadius:1,overflow:"hidden"}}>
+                  <div key={"pb"+newsIdx} style={{height:"100%",background:tickerCol,width:"100%",animation:"sr-ticker 5s linear forwards"}}/>
+                </div>
+              </div>
+            )}
+          </div>
+
+          {popup&&(()=>{
+            if(popup.type==="route"){
+              const r=popup.route,isBRI=popup.isBRI,col=isBRI?"#ff9900":(r.color||"#00e5ff");
+              return(
+                <div onClick={e=>e.stopPropagation()} style={{position:"fixed",left:Math.min(popup.x+14,W2-330),top:Math.max(10,Math.min(popup.y-20,H2-360)),width:300,background:"#06101c",border:"1px solid "+col+"60",borderRadius:2,zIndex:500,maxHeight:360,display:"flex",flexDirection:"column"}}>
+                  <div style={{background:col+"18",borderBottom:"1px solid "+col+"44",padding:"10px 12px",position:"relative"}}>
+                    <div onClick={()=>setPopup(null)} style={{position:"absolute",top:8,right:10,color:"#3a5570",cursor:"pointer",fontSize:14}}>×</div>
+                    <div style={{fontFamily:"Orbitron,monospace",fontSize:6,color:col,letterSpacing:3,marginBottom:3}}>{isBRI?"BRI ROUTE":"TRADE ROUTE"}</div>
+                    <div style={{fontFamily:"Rajdhani,sans-serif",fontSize:14,fontWeight:700,color:col}}>{r.label}</div>
+                  </div>
+                  <div style={{padding:"10px 12px",overflowY:"auto"}}>
+                    {r.from&&<div style={{marginBottom:7}}><div style={{fontFamily:"Orbitron,monospace",fontSize:5.5,color:"#3a5570",letterSpacing:2,marginBottom:2}}>FROM</div><div style={{fontFamily:"Share Tech Mono,monospace",fontSize:8,color:"#c8d8e4"}}>{r.from}</div></div>}
+                    {r.to&&<div style={{marginBottom:7}}><div style={{fontFamily:"Orbitron,monospace",fontSize:5.5,color:"#3a5570",letterSpacing:2,marginBottom:2}}>TO</div><div style={{fontFamily:"Share Tech Mono,monospace",fontSize:8,color:"#c8d8e4"}}>{r.to}</div></div>}
+                    {r.cargo&&<div style={{marginBottom:7}}><div style={{fontFamily:"Orbitron,monospace",fontSize:5.5,color:"#3a5570",letterSpacing:2,marginBottom:2}}>CARGO</div><div style={{fontFamily:"Share Tech Mono,monospace",fontSize:8,color:"#c8d8e4"}}>{r.cargo}</div></div>}
+                    {r.notes&&<div><div style={{fontFamily:"Orbitron,monospace",fontSize:5.5,color:"#3a5570",letterSpacing:2,marginBottom:2}}>INTEL</div><div style={{fontFamily:"Share Tech Mono,monospace",fontSize:7.5,color:"#a0b8c8",lineHeight:1.5}}>{r.notes}</div></div>}
+                  </div>
+                </div>
+              );
+            }
+            if(popup.type==="port"){
+              const p=popup.port;
+              const sc=p.status==="NORMAL"?"#00aa55":p.status==="DISRUPTED"?"#ff3344":p.status==="ELEVATED"?"#ff8800":p.status==="GROWING"?G:"#ff8800";
+              return(
+                <div onClick={e=>e.stopPropagation()} style={{position:"fixed",left:Math.min(popup.x+14,W2-320),top:Math.max(10,Math.min(popup.y-20,H2-360)),width:290,background:"#06101c",border:"1px solid "+C+"50",borderRadius:2,zIndex:500,maxHeight:380,display:"flex",flexDirection:"column"}}>
+                  <div style={{background:"rgba(0,212,255,0.1)",borderBottom:"1px solid "+C+"30",padding:"10px 12px",position:"relative"}}>
+                    <div onClick={()=>setPopup(null)} style={{position:"absolute",top:8,right:10,color:"#3a5570",cursor:"pointer",fontSize:14}}>×</div>
+                    <div style={{fontFamily:"Orbitron,monospace",fontSize:6,color:C,letterSpacing:3,marginBottom:2}}>PORT INTELLIGENCE</div>
+                    <div style={{fontFamily:"Rajdhani,sans-serif",fontSize:15,fontWeight:700,color:C}}>{p.name}</div>
+                  </div>
+                  <div style={{padding:"8px 12px",overflowY:"auto"}}>
+                    <div style={{display:"flex",gap:8,marginBottom:8}}>
+                      <div style={{flex:1,padding:"6px 8px",background:"rgba(0,212,255,0.08)",border:"1px solid "+C+"20",borderRadius:2}}>
+                        <div style={{fontFamily:"Orbitron,monospace",fontSize:5.5,color:C,letterSpacing:1,marginBottom:2}}>RANK</div>
+                        <div style={{fontFamily:"Orbitron,monospace",fontSize:11,color:C}}>{p.rank}</div>
+                      </div>
+                      <div style={{flex:1,padding:"6px 8px",background:sc+"12",border:"1px solid "+sc+"30",borderRadius:2}}>
+                        <div style={{fontFamily:"Orbitron,monospace",fontSize:5.5,color:sc,letterSpacing:1,marginBottom:2}}>STATUS</div>
+                        <div style={{fontFamily:"Share Tech Mono,monospace",fontSize:11,color:sc,fontWeight:700}}>{p.status}</div>
+                      </div>
+                    </div>
+                    <div style={{marginBottom:7}}><div style={{fontFamily:"Orbitron,monospace",fontSize:5.5,color:"#3a5570",letterSpacing:2,marginBottom:2}}>VOLUME</div><div style={{fontFamily:"Orbitron,monospace",fontSize:13,color:C}}>{p.vol}</div></div>
+                    {p.who&&<div style={{marginBottom:7}}><div style={{fontFamily:"Orbitron,monospace",fontSize:5.5,color:"#3a5570",letterSpacing:2,marginBottom:2}}>OWNERSHIP</div><div style={{fontFamily:"Share Tech Mono,monospace",fontSize:8,color:"#c8d8e4"}}>{p.who}</div></div>}
+                    {p.cargo&&<div style={{marginBottom:7}}><div style={{fontFamily:"Orbitron,monospace",fontSize:5.5,color:"#3a5570",letterSpacing:2,marginBottom:2}}>CARGO</div><div style={{fontFamily:"Share Tech Mono,monospace",fontSize:8,color:"#a0b8c8"}}>{p.cargo}</div></div>}
+                    {p.intel&&<div><div style={{fontFamily:"Orbitron,monospace",fontSize:5.5,color:"#3a5570",letterSpacing:2,marginBottom:2}}>INTEL</div><div style={{fontFamily:"Share Tech Mono,monospace",fontSize:7.5,color:"#a0b8c8",lineHeight:1.5}}>{p.intel}</div></div>}
+                  </div>
+                </div>
+              );
+            }
+            if(popup.type==="event"){
+              const ev=popup.event,col=TC[ev.type]||"#fff";
+              const mob=W2<500,pw=mob?W2-20:320;
+              const pl=mob?10:Math.min(popup.x+14,W2-pw-10);
+              const pt2=mob?Math.max(10,H2-520):Math.max(10,Math.min(popup.y-20,H2-510));
+              return(
+                <div onClick={e=>e.stopPropagation()} style={{position:"fixed",left:pl,top:pt2,width:pw,background:"#06101c",border:"1px solid "+col+"50",borderRadius:2,zIndex:500,maxHeight:500,display:"flex",flexDirection:"column"}}>
+                  <div style={{background:col+"20",borderBottom:"1px solid "+col+"55",padding:"10px 12px",position:"relative"}}>
+                    <div onClick={()=>setPopup(null)} style={{position:"absolute",top:8,right:10,color:"#3a5570",cursor:"pointer",fontSize:14}}>×</div>
+                    <div style={{fontFamily:"Orbitron,monospace",fontSize:7,color:col,letterSpacing:2,marginBottom:2}}>{ev.type.toUpperCase()} · {ev.region}</div>
+                    <div style={{fontFamily:"Rajdhani,sans-serif",fontSize:15,fontWeight:700,color:col}}>{ev.title}</div>
+                  </div>
+                  <div style={{overflowY:"auto",padding:"10px 12px",flex:1}}>
+                    <div style={{fontFamily:"Share Tech Mono,monospace",fontSize:9,color:"#8abacc",lineHeight:1.5,marginBottom:10}}>{ev.plain}</div>
+                    {[["BEGINNER",ev.beginner,"#00ff88"],["TRADER",ev.trader,"#00e5ff"],["BIZ OPP",ev.biz,"#ff8800"]].map(([label,items,c2])=>(
+                      <div key={label} style={{marginBottom:8}}>
+                        <div style={{fontFamily:"Orbitron,monospace",fontSize:6,color:c2,letterSpacing:2,marginBottom:3}}>{label}</div>
+                        {(items||[]).slice(0,1).map((item,j)=>(
+                          <div key={j} style={{fontFamily:"Share Tech Mono,monospace",fontSize:8,color:"#a0b8c8",lineHeight:1.5,paddingLeft:6,borderLeft:"2px solid "+c2+"40"}}>{item}</div>
+                        ))}
+                      </div>
+                    ))}
+                    <div style={{background:col+"12",border:"1px solid "+col+"44",padding:"8px 10px",borderRadius:2,marginTop:6}}>
+                      <div style={{fontFamily:"Orbitron,monospace",fontSize:6,color:col,letterSpacing:2,marginBottom:3}}>ACTION NOW</div>
+                      <div style={{fontFamily:"Share Tech Mono,monospace",fontSize:8.5,color:"#c8d8e4",lineHeight:1.5}}>{ev.now}</div>
+                    </div>
+                  </div>
+                </div>
+              );
+            }
+            if(popup.type==="country"){
+              return(
+                <div onClick={e=>e.stopPropagation()} style={{position:"fixed",left:Math.min(popup.x+10,W2-200),top:Math.max(10,popup.y-30),width:180,background:"rgba(6,16,28,0.97)",border:"1px solid #1a3050",padding:"8px 12px",borderRadius:2,zIndex:500}}>
+                  <div onClick={()=>setPopup(null)} style={{position:"absolute",top:6,right:8,color:"#3a5570",cursor:"pointer",fontSize:12}}>×</div>
+                  <div style={{fontFamily:"Orbitron,monospace",fontSize:7,color:C,letterSpacing:2,marginBottom:4}}>{popup.name}</div>
+                  <div style={{fontFamily:"Share Tech Mono,monospace",fontSize:8,color:"#8aa0b0"}}>Click events for intelligence</div>
+                </div>
+              );
+            }
+            return null;
+          })()}
+        </div>
+
+        {!isMobile&&(
+          <div style={{width:240,background:"#040912",borderLeft:"1px solid #0e2040",display:"flex",flexDirection:"column",overflow:"hidden"}}>
+            <div style={{display:"flex",borderBottom:"1px solid #0e2040",flexShrink:0}}>
+              {[["xfeed","LIVE",GR],["intel","INTEL",R],["trade","TRADE",C],["prices","MKT","#c9a84c"]].map(([id,lbl,col])=>(
+                <div key={id} onClick={()=>setTab(id)} style={{flex:1,padding:"8px 2px",textAlign:"center",fontFamily:"Orbitron,monospace",fontSize:7,letterSpacing:1,cursor:"pointer",color:tab===id?col:"#3a5570",borderBottom:"2px solid "+(tab===id?col:"transparent"),background:tab===id?"rgba(0,0,0,0.3)":"transparent"}}>{lbl}</div>
+              ))}
+            </div>
+
+            {tab==="xfeed"&&(
+              <div style={{flex:1,display:"flex",flexDirection:"column",overflow:"hidden"}}>
+                <div style={{padding:"6px 8px",borderBottom:"1px solid #0e2040",flexShrink:0,display:"flex",justifyContent:"space-between",alignItems:"center"}}>
+                  <div style={{display:"flex",alignItems:"center",gap:5}}>
+                    <div style={{width:5,height:5,borderRadius:"50%",background:feedLoading?"#ff8800":GR,animation:"sr-pulse 1.5s infinite"}}/>
+                    <span style={{fontFamily:"Orbitron,monospace",fontSize:6,color:GR,letterSpacing:2}}>{lastRefresh?"UPDATED "+lastRefresh:"LIVE INTEL"}</span>
+                  </div>
+                  <div onClick={()=>loadFeed(feedTopic)} style={{fontFamily:"Orbitron,monospace",fontSize:5.5,color:feedLoading?"#ff8800":G,cursor:"pointer",padding:"2px 6px",border:"1px solid #0e2040",letterSpacing:1}}>
+                    <span style={{display:"inline-block",animation:feedLoading?"sr-spin 1s linear infinite":"none"}}>⟳</span>
+                  </div>
+                </div>
+                <div style={{display:"flex",gap:2,padding:"4px 6px",flexWrap:"wrap",borderBottom:"1px solid #0e2040",flexShrink:0}}>
+                  {FEED_TOPICS.map(t=>(
+                    <div key={t.key} onClick={()=>{setFeedTopic(t.key);loadFeed(t.key);}} style={{fontFamily:"Share Tech Mono,monospace",fontSize:6,padding:"2px 5px",cursor:"pointer",border:"1px solid "+(feedTopic===t.key?"#00ff88":"#0e2040"),color:feedTopic===t.key?G:"#3a5570",background:feedTopic===t.key?"rgba(0,255,136,0.05)":"transparent"}}>{t.label}</div>
+                  ))}
+                </div>
+                <div style={{flex:1,overflowY:"auto",padding:6}}>
+                  {feedLoading&&liveFeed.length===0&&(
+                    <div style={{textAlign:"center",padding:"30px 10px"}}>
+                      <div style={{fontFamily:"Orbitron,monospace",fontSize:7,color:GR,marginBottom:8,animation:"sr-pulse 1s infinite"}}>SEARCHING LIVE SOURCES</div>
+                      <div style={{fontFamily:"Share Tech Mono,monospace",fontSize:7,color:"#3a5570"}}>Fetching real-time data...</div>
+                    </div>
+                  )}
+                  {feedError&&<div style={{fontFamily:"Share Tech Mono,monospace",fontSize:8,color:R,padding:"10px 8px",border:"1px solid "+R+"30",margin:4}}>{feedError}</div>}
+                  {liveFeed.map((item,i)=>{
+                    const col=catColors[item.cat]||"#a8c4d4";
+                    const sc=sentColors[item.sentiment]||"#a8c4d4";
+                    return(
+                      <div key={i} style={{background:"#0a1220",border:"1px solid #0e2040",borderLeft:"3px solid "+col,padding:"8px 8px 6px",marginBottom:4,borderRadius:1}}>
+                        <div style={{display:"flex",justifyContent:"space-between",marginBottom:3}}>
+                          <span style={{fontFamily:"Share Tech Mono,monospace",fontSize:7,color:col,textTransform:"uppercase"}}>{item.cat||"market"}</span>
+                          <span style={{fontFamily:"Share Tech Mono,monospace",fontSize:6,color:"#3a5570"}}>{item.time||"live"}</span>
+                        </div>
+                        <div style={{fontFamily:"Rajdhani,sans-serif",fontSize:11,color:"#d4eaf8",lineHeight:1.4,marginBottom:4}}>{item.headline}</div>
+                        <div style={{display:"flex",justifyContent:"space-between",alignItems:"center"}}>
+                          <div style={{display:"flex",gap:5,alignItems:"center"}}>
+                            <span style={{fontFamily:"Orbitron,monospace",fontSize:5.5,padding:"1px 4px",background:sc+"20",border:"1px solid "+sc+"40",color:sc}}>{item.sentiment||"neutral"}</span>
+                            <span style={{fontFamily:"Share Tech Mono,monospace",fontSize:6,color:"#3a5570"}}>{item.source||"wire"}</span>
+                          </div>
+                          {item.search&&<a href={"https://www.google.com/search?q="+encodeURIComponent(item.search)} target="_blank" rel="noreferrer" style={{fontFamily:"Share Tech Mono,monospace",fontSize:6,color:"#2a6080",textDecoration:"none"}}>verify →</a>}
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
+
+            {tab==="intel"&&(
+              <div style={{flex:1,overflowY:"auto",padding:8}}>
+                <div style={{fontFamily:"Orbitron,monospace",fontSize:6.5,color:R,letterSpacing:2,marginBottom:8,display:"flex",justifyContent:"space-between",alignItems:"center"}}>
+                  <span>INTELLIGENCE FEED</span>
+                  <div onClick={()=>loadFeed("all")} style={{fontSize:5.5,cursor:"pointer",color:"#2a4050",padding:"2px 5px",border:"1px solid #0e2040"}}>{feedLoading?"...":"⟳"}</div>
+                </div>
+                {liveFeed.length===0&&<div style={{textAlign:"center",padding:"20px",fontFamily:"Share Tech Mono,monospace",fontSize:8,color:"#2a4050"}}>{feedLoading?"FETCHING...":"← OPEN LIVE TAB FIRST"}</div>}
+                {liveFeed.map((item,i)=>{
+                  const col=TC[item.cat]||catColors[item.cat]||"#fff";
+                  return(
+                    <div key={i} style={{borderLeft:"3px solid "+col,padding:"8px 10px",marginBottom:4,background:"#0a1220"}}>
+                      <div style={{fontFamily:"Orbitron,monospace",fontSize:6,letterSpacing:2,padding:"1px 5px",background:col+"20",display:"inline-block",marginBottom:3,color:col}}>{(item.cat||"INTEL").toUpperCase()}</div>
+                      <div style={{fontFamily:"Rajdhani,sans-serif",fontSize:11,fontWeight:600,color:"#d4eaf8",lineHeight:1.4}}>{item.headline}</div>
+                      <div style={{display:"flex",justifyContent:"space-between",fontFamily:"Share Tech Mono,monospace",fontSize:6,color:"#3a5570",marginTop:3}}>
+                        <span>{item.source||"summit intel"}</span><span>{item.time||"live"}</span>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            )}
+
+            {tab==="trade"&&(
+              <div style={{flex:1,overflowY:"auto",padding:8}}>
+                <div style={{fontFamily:"Orbitron,monospace",fontSize:7,letterSpacing:2,color:C,marginBottom:8,paddingBottom:5,borderBottom:"1px solid #0e2040"}}>GLOBAL ROUTES</div>
+                {TRADE_ROUTES.map((r,i)=>(
+                  <div key={i} style={{background:"#0a1220",border:"1px solid #0e2040",padding:"7px 8px",marginBottom:3,display:"flex",alignItems:"flex-start",gap:7,borderRadius:1}}>
+                    <div style={{width:7,height:7,borderRadius:"50%",background:r.color,boxShadow:"0 0 5px "+r.color+"60",flexShrink:0,marginTop:2}}/>
+                    <div style={{flex:1}}>
+                      <div style={{fontFamily:"Rajdhani,sans-serif",fontSize:11,fontWeight:600,color:"#d4eaf8"}}>{r.name}</div>
+                      <div style={{fontFamily:"Share Tech Mono,monospace",fontSize:7,color:"#6a8a9a"}}>{r.vol}</div>
+                    </div>
+                    <div style={{fontFamily:"Orbitron,monospace",fontSize:6,letterSpacing:1,padding:"2px 4px",border:"1px solid "+r.color+"40",color:r.color,flexShrink:0}}>{r.status}</div>
+                  </div>
+                ))}
+                <div style={{marginTop:10,fontFamily:"Orbitron,monospace",fontSize:7,letterSpacing:2,color:C,marginBottom:6,paddingBottom:5,borderBottom:"1px solid #0e2040"}}>MARKET STATS</div>
+                <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:5}}>
+                  {MSTATS.map((s,i)=>(
+                    <div key={i} style={{background:"#0a1220",border:"1px solid #0e2040",padding:"8px 8px",borderRadius:1}}>
+                      <div style={{fontFamily:"Orbitron,monospace",fontSize:6,letterSpacing:1,color:"#3a5570",marginBottom:2}}>{s.label}</div>
+                      <div style={{fontFamily:"Orbitron,monospace",fontSize:17,fontWeight:700,color:s.color}}>{s.value}</div>
+                      <div style={{fontFamily:"Share Tech Mono,monospace",fontSize:7,color:"#6a8a9a"}}>{s.sub}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {tab==="prices"&&(
+              <div style={{flex:1,overflowY:"auto",padding:8}}>
+                <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:8,paddingBottom:5,borderBottom:"1px solid #0e2040"}}>
+                  <span style={{fontFamily:"Orbitron,monospace",fontSize:7,letterSpacing:2,color:"#c9a84c"}}>MARKET PRICES</span>
+                  <div style={{display:"flex",gap:6,alignItems:"center"}}>
+                    {pricesLive&&<span style={{fontFamily:"Share Tech Mono,monospace",fontSize:6,color:G}}>● LIVE</span>}
+                    <div onClick={loadPrices} style={{fontFamily:"Orbitron,monospace",fontSize:5.5,color:pricesLoading?"#ff8800":"#2a4050",cursor:"pointer",padding:"2px 5px",border:"1px solid #0e2040"}}>
+                      <span style={{display:"inline-block",animation:pricesLoading?"sr-spin 1s linear infinite":"none"}}>⟳</span>
+                    </div>
+                  </div>
+                </div>
+                {["crypto","metal","commodity","defence"].map(cat=>{
+                  const items=prices.filter(c=>c.cat===cat);
+                  if(!items.length) return null;
+                  const catLabel={crypto:"CRYPTO",metal:"METALS",commodity:"COMMODITIES",defence:"DEFENCE"}[cat];
+                  const catCol={crypto:"#f7931a",metal:G,commodity:O,defence:"#ff4444"}[cat];
+                  return(
+                    <div key={cat} style={{marginBottom:10}}>
+                      <div style={{fontFamily:"Orbitron,monospace",fontSize:5.5,letterSpacing:2,color:catCol,marginBottom:4,paddingBottom:3,borderBottom:"1px solid #0e2040"}}>{catLabel}</div>
+                      {items.map(c=>{
+                        const chg=(c.price-c.prev)/c.prev*100,up=chg>=0;
+                        return(
+                          <div key={c.sym} style={{background:"#0a1220",border:"1px solid #0e2040",padding:"6px 8px",marginBottom:2,display:"flex",justifyContent:"space-between",alignItems:"center",borderRadius:1}}>
+                            <div>
+                              <span style={{fontFamily:"Orbitron,monospace",fontSize:8,color:"#c8d8e4"}}>{c.sym} </span>
+                              <span style={{fontFamily:"Share Tech Mono,monospace",fontSize:6,color:"#3a5570"}}>{c.name}</span>
+                            </div>
+                            <div style={{textAlign:"right"}}>
+                              <div style={{fontFamily:"Orbitron,monospace",fontSize:9,color:catCol}}>{c.cat==="crypto"?"$":""}{c.price.toLocaleString(undefined,{maximumFractionDigits:c.price>100?2:c.price>1?3:5})}</div>
+                              <div style={{fontFamily:"Share Tech Mono,monospace",fontSize:7,color:up?GR:R}}>{up?"▲":"▼"}{Math.abs(chg).toFixed(2)}%</div>
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  );
+                })}
+                {!pricesLive&&<div style={{fontFamily:"Share Tech Mono,monospace",fontSize:7,color:"#2a4050",textAlign:"center",padding:"8px 0",borderTop:"1px solid #0e2040",marginTop:4}}>Indicative only. Click ⟳ for live data.</div>}
+              </div>
+            )}
+          </div>
+        )}
+      </div>
+
+      {isMobile&&showPanel&&(
+        <div style={{position:"absolute",top:0,left:0,bottom:0,width:"72vw",maxWidth:270,background:"#040912",borderRight:"1px solid #0e2040",zIndex:200,display:"flex",flexDirection:"column"}}>
+          <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",padding:"10px 12px",borderBottom:"1px solid #0e2040"}}>
+            <span style={{fontFamily:"Orbitron,monospace",fontSize:8,color:G,letterSpacing:2}}>SUMMIT INTEL</span>
+            <div onClick={()=>setShowPanel(false)} style={{color:"#3a5570",cursor:"pointer",fontSize:18}}>×</div>
+          </div>
+          <div style={{display:"flex",borderBottom:"1px solid #0e2040",flexShrink:0}}>
+            {[["xfeed","LIVE",GR],["intel","INTEL",R],["trade","TRD",C],["prices","MKT","#c9a84c"]].map(([id,lbl,col])=>(
+              <div key={id} onClick={()=>setTab(id)} style={{flex:1,padding:"7px 2px",textAlign:"center",fontFamily:"Orbitron,monospace",fontSize:6.5,cursor:"pointer",color:tab===id?col:"#3a5570",borderBottom:"2px solid "+(tab===id?col:"transparent")}}>{lbl}</div>
+            ))}
+          </div>
+          <div style={{flex:1,overflowY:"auto",padding:8}}>
+            {tab==="xfeed"&&(
+              <div>
+                <div onClick={()=>loadFeed(feedTopic)} style={{display:"flex",alignItems:"center",justifyContent:"center",gap:6,padding:"8px",background:"#0a1220",border:"1px solid #0e2040",marginBottom:8,cursor:"pointer",fontFamily:"Orbitron,monospace",fontSize:7,color:feedLoading?"#ff8800":GR,letterSpacing:1}}>
+                  <span style={{display:"inline-block",animation:feedLoading?"sr-spin 1s linear infinite":"none"}}>⟳</span>
+                  {feedLoading?"FETCHING...":"REFRESH INTEL"}
+                </div>
+                {liveFeed.slice(0,6).map((item,i)=>{
+                  const col=catColors[item.cat]||"#a8c4d4";
+                  return(
+                    <div key={i} style={{background:"#0a1220",border:"1px solid #0e2040",borderLeft:"3px solid "+col,padding:"7px 8px",marginBottom:3}}>
+                      <div style={{fontFamily:"Rajdhani,sans-serif",fontSize:10,color:"#d4eaf8",lineHeight:1.4,marginBottom:3}}>{item.headline}</div>
+                      <div style={{display:"flex",justifyContent:"space-between",fontFamily:"Share Tech Mono,monospace",fontSize:6}}>
+                        <span style={{color:col}}>{item.cat||"market"}</span>
+                        {item.search&&<a href={"https://www.google.com/search?q="+encodeURIComponent(item.search)} target="_blank" rel="noreferrer" style={{color:"#2a6080",textDecoration:"none"}}>verify →</a>}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            )}
+            {tab==="intel"&&liveFeed.slice(0,10).map((item,i)=>{
+              const col=TC[item.cat]||catColors[item.cat]||"#fff";
+              return(<div key={i} style={{borderLeft:"2px solid "+col,padding:"6px 8px",marginBottom:4,background:"#0a1220"}}>
+                <div style={{fontFamily:"Rajdhani,sans-serif",fontSize:10,fontWeight:600,color:"#d4eaf8",lineHeight:1.4}}>{item.headline}</div>
+                <div style={{fontFamily:"Share Tech Mono,monospace",fontSize:6,color:"#3a5570",marginTop:2}}>{item.source||""} {item.time||"live"}</div>
+              </div>);
+            })}
+            {tab==="prices"&&prices.slice(0,12).map(c=>{
+              const chg=(c.price-c.prev)/c.prev*100,up=chg>=0;
+              const cc={crypto:"#f7931a",metal:G,commodity:O,defence:"#ff4444"}[c.cat]||C;
+              return(<div key={c.sym} style={{background:"#0a1220",border:"1px solid #0e2040",padding:"6px 8px",marginBottom:2,display:"flex",justifyContent:"space-between",alignItems:"center"}}>
+                <span style={{fontFamily:"Orbitron,monospace",fontSize:8,color:"#c8d8e4"}}>{c.sym}</span>
+                <div style={{textAlign:"right"}}>
+                  <div style={{fontFamily:"Orbitron,monospace",fontSize:9,color:cc}}>{c.price.toLocaleString(undefined,{maximumFractionDigits:c.price>100?2:3})}</div>
+                  <div style={{fontFamily:"Share Tech Mono,monospace",fontSize:7,color:up?GR:R}}>{up?"▲":"▼"}{Math.abs(chg).toFixed(2)}%</div>
+                </div>
+              </div>);
+            })}
+            {tab==="trade"&&TRADE_ROUTES.map((r,i)=>(
+              <div key={i} style={{background:"#0a1220",border:"1px solid #0e2040",padding:"6px 8px",marginBottom:3,display:"flex",gap:6,alignItems:"center"}}>
+                <div style={{width:6,height:6,borderRadius:"50%",background:r.color,flexShrink:0}}/>
+                <div style={{flex:1}}>
+                  <div style={{fontFamily:"Rajdhani,sans-serif",fontSize:10,fontWeight:600,color:"#d4eaf8"}}>{r.name}</div>
+                  <div style={{fontFamily:"Share Tech Mono,monospace",fontSize:6.5,color:"#6a8a9a"}}>{r.vol}</div>
+                </div>
+                <div style={{fontFamily:"Orbitron,monospace",fontSize:5.5,color:r.color}}>{r.status}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+      {isMobile&&showPanel&&<div onClick={()=>setShowPanel(false)} style={{position:"absolute",top:0,right:0,bottom:0,left:"72vw",background:"rgba(0,0,0,0.5)",zIndex:199}}/>}
+
+      {isMobile&&(
+        <div style={{height:50,background:"#040912",borderTop:"1px solid #0e2040",display:"flex",flexShrink:0}}>
+          {[["xfeed","LIVE",GR],["intel","INTEL",R],["trade","TRADE",C],["prices","MKT","#c9a84c"]].map(([id,lbl,col])=>(
+            <div key={id} onClick={()=>{setTab(id);setShowPanel(true);}} style={{flex:1,display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",gap:3,cursor:"pointer",background:tab===id?"rgba(0,0,0,0.3)":"transparent"}}>
+              <div style={{width:5,height:5,borderRadius:"50%",background:tab===id?col:"#3a5570"}}/>
+              <span style={{fontFamily:"Orbitron,monospace",fontSize:6,color:tab===id?col:"#3a5570"}}>{lbl}</span>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
 }
 
-function setLayer(layer, el) {
-  activeLayer = layer;
-  document.querySelectorAll(".mf").forEach(b => b.classList.remove("active"));
-  el.classList.add("active");
-  renderMarkers();
-}
+ReactDOM.createRoot(document.getElementById("situation-root")).render(<SituationRoom/>);
 
-function setMapType(type) {
-  map.setMapTypeId(type);
-  document.querySelectorAll(".mt-btn").forEach(b => b.classList.remove("active"));
-  document.getElementById("btn-" + type).classList.add("active");
-}
-
-function toggleSide() {
-  document.getElementById("side").classList.toggle("open");
-}
-
-function sw(tab) {
-  document.querySelectorAll(".ss").forEach(s => s.classList.remove("active"));
-  document.querySelectorAll(".stab").forEach(s => s.classList.remove("active"));
-
-  document.getElementById("ss-" + tab).classList.add("active");
-  document.getElementById("stab-" + tab).classList.add("active");
-}
 </script>
 
-<!-- GOOGLE MAPS (REQUIRED FIX) -->
-<script async
-src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap">
-</script>
+</body>
+</html>
